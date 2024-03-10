@@ -111,7 +111,7 @@ public class AdminMainFormController {
 
     @FXML
     void btnUsersOnAction(ActionEvent event) throws IOException {
-        Parent form = FXMLLoader.load(getClass().getResource("/view/user_borrowing_books_form.fxml"));
+        Parent form = FXMLLoader.load(getClass().getResource("/view/admin_search_user_form.fxml"));
 
         this.admin_dashboard.getChildren().clear();
         this.admin_dashboard.getChildren().add(form);

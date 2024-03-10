@@ -2,6 +2,7 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dto.UserDTO;
+import lk.ijse.entity.Branch;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -102,5 +103,21 @@ public class UserDAOImpl {
         session.close();
 
         return updated;
+    }
+
+    public List<User> getAll() {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM User";
+        Query query = session.createQuery(hql);
+
+        List<User> users = query.list();
+
+        transaction.commit();
+        session.close();
+
+        return users;
     }
 }

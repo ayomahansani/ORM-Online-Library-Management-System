@@ -6,9 +6,13 @@ import lk.ijse.dto.UserDTO;
 import lk.ijse.entity.Branch;
 import lk.ijse.entity.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserBOImpl {
 
     private UserDAOImpl userDAO = new UserDAOImpl();
+
     public boolean saveUserSignUp(UserDTO userDTO) {
         BranchDTO branchDTO = userDTO.getBranchDTO();
         Branch branch = new Branch(branchDTO.getBranch_id(),branchDTO.getBranch_address(), branchDTO.getBranch_telephone(),null,null);
@@ -30,5 +34,19 @@ public class UserBOImpl {
 
     public boolean updateUserDetails(String name, String newEmail, String newPw) {
         return userDAO.updateUserDetails(name,newEmail,newPw);
+    }
+
+    public List<UserDTO> getAllUsers() {
+
+        List<User> users = userDAO.getAll();
+        List<UserDTO> userDTOS = new ArrayList<>();
+
+        for(User user : users){
+            Branch branch = user.getBranch();
+            BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
+            userDTOS.add(new UserDTO(user.getUserEmail(),user.getUserName(),user.getUserPassword(),branchDTO));
+        }
+
+        return userDTOS;
     }
 }
