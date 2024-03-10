@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loginPage" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginFormController">
+   <children>
+      <Label layoutX="228.0" layoutY="30.0" prefHeight="46.0" prefWidth="144.0" text="Login Form">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsername" layoutX="112.0" layoutY="222.0" onAction="#txtUsernameOnAction" prefHeight="35.0" prefWidth="376.0" />
+      <TextField fx:id="txtPassword" layoutX="112.0" layoutY="294.0" onAction="#txtPasswordOnAction" prefHeight="35.0" prefWidth="376.0" />
+      <Button fx:id="btnLogin" layoutX="204.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="184.0" text="Login">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="112.0" layoutY="191.0" prefHeight="21.0" prefWidth="277.0" text="Username ( Enter your email )" />
+      <Label layoutX="112.0" layoutY="266.0" prefHeight="21.0" prefWidth="120.0" text="Password" />
+      <JFXComboBox fx:id="cmbAdminOrUser" layoutX="112.0" layoutY="130.0" prefHeight="35.0" prefWidth="144.0" />
+      <Label layoutX="112.0" layoutY="109.0" prefHeight="21.0" prefWidth="120.0" text="Admin Or User ?" />
+      <Label layoutX="112.0" layoutY="442.0" prefHeight="19.0" prefWidth="184.0" text="Don't have an account ?">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnSignupHere" layoutX="377.0" layoutY="438.0" mnemonicParsing="false" onAction="#btnSignupHereOnAction" style="-fx-background-color: transparent;" text="Signup Here" underline="true" />
+      <Button fx:id="btnForgotPassword" layoutX="102.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnForgotPasswordOnAction" prefHeight="27.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Forgot your password ?" underline="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
