@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.entity.Book;
 import lk.ijse.entity.Branch;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -99,12 +100,16 @@ public class BranchDAOImpl {
         return true;
     }
 
-    public Branch search(String id) {
+    public Branch search(String branchAddress) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Branch branch = session.get(Branch.class, id);
+        String hql = "FROM Branch WHERE branchAddress=:address";
+        Query query = session.createQuery(hql);
+        query.setParameter("address", branchAddress);
+
+        Branch branch = (Branch) query.uniqueResult();
 
         transaction.commit();
         session.close();

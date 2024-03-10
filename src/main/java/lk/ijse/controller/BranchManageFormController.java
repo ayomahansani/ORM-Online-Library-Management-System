@@ -31,6 +31,9 @@ public class BranchManageFormController {
     private TextField txtAddress;
 
     @FXML
+    private TextField txtBranchSearch;
+
+    @FXML
     private TableView<BranchTm> tblBranches;
 
     @FXML
@@ -188,16 +191,17 @@ public class BranchManageFormController {
         txtBranchId.setText("");
         txtAddress.setText("");
         txtTel.setText("");
+        txtBranchSearch.setText("");
     }
 
     @FXML
     void txtBranchSearchOnAction(ActionEvent event) {
 
-        if ((Pattern.matches("[Br][0-9]{3,}", txtBranchId.getText()))) {
+        //if ((Pattern.matches("[Br][0-9]{3,}", txtBranchId.getText()))) {
 
-            String id = txtBranchId.getText();
+            String branchAddress = txtBranchSearch.getText();
 
-            BranchDTO branchDTO = branchBO.searchBranch(id);
+            BranchDTO branchDTO = branchBO.searchBranch(branchAddress);
 
             if(branchDTO != null){
                 txtBranchId.setText(branchDTO.getBranch_id());
@@ -206,9 +210,14 @@ public class BranchManageFormController {
             }else {
                 new Alert(Alert.AlertType.INFORMATION, "branch not found").show();
             }
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Invalid Id").show();
-        }
+        /*}else {
+            new Alert(Alert.AlertType.ERROR, "Invalid Address").show();
+        }*/
+    }
+
+    @FXML
+    void txtBranchIdOnAction(ActionEvent event){
+        txtAddress.requestFocus();
     }
 
     @FXML

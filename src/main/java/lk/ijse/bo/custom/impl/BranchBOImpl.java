@@ -45,9 +45,9 @@ public class BranchBOImpl {
         return branchDAO.delete(id);
     }
 
-    public BranchDTO searchBranch(String id) {
+    public BranchDTO searchBranch(String branchAddress) {
 
-        Branch branch = branchDAO.search(id);
+        Branch branch = branchDAO.search(branchAddress);
         return new BranchDTO(branch.getBranchId(),branch.getBranchAddress(), branch.getBranchTelephone());
     }
 
