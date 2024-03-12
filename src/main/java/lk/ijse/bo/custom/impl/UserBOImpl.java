@@ -32,8 +32,8 @@ public class UserBOImpl {
         return userDAO.getName(email);
     }
 
-    public boolean updateUserDetails(String name, String newEmail, String newPw) {
-        return userDAO.updateUserDetails(name,newEmail,newPw);
+    public boolean updateUserDetails(String name, String newName, String newEmail, String newPw) {
+        return userDAO.updateUserDetails(name,newName,newEmail,newPw);
     }
 
     public List<UserDTO> getAllUsers() {
@@ -48,5 +48,22 @@ public class UserBOImpl {
         }
 
         return userDTOS;
+    }
+
+    public boolean deleteAccount(String email) {
+        return userDAO.delete(email);
+    }
+
+    public String getUserBranch(String email) {
+        return userDAO.getUserBranch(email);
+    }
+
+    public UserDTO getUser(String email) {
+
+        User user = userDAO.getUser(email);
+        Branch branch = user.getBranch();
+        BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
+
+        return new UserDTO(user.getUserEmail(),user.getUserName(),user.getUserPassword(),branchDTO);
     }
 }

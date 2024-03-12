@@ -2,6 +2,7 @@ package lk.ijse.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -12,8 +13,8 @@ import java.util.Date;
 public class UsersBorrowingBooksDTO {
 
     private String transaction_id;
-    private Date borrow_date;
-    private Date return_date;
+    private LocalDate borrow_date;
+    private LocalDate return_date;
     private boolean is_return;
     private UserDTO userDTO;
     private BookDTO bookDTO;

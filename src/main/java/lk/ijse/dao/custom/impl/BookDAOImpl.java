@@ -2,7 +2,6 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.entity.Book;
-import lk.ijse.entity.Branch;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -129,5 +128,75 @@ public class BookDAOImpl {
         session.close();
 
         return books;
+    }
+
+    public List<Book> getBooksSpecificByBranch(String branchId) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM Book WHERE branch.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", branchId);
+
+        List<Book> books = query.list();
+
+        transaction.commit();
+        session.close();
+
+        return books;
+    }
+
+    public Book isBookAvailable(String bookTitle, String branchId) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM Book WHERE branch.id=:id and title=:title";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", branchId);
+        query.setParameter("title", bookTitle);
+
+        Book book = (Book) query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return book;
+    }
+
+    public List<Book> getBooksSpecificByGenre(String bookGenre, String branchId) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM Book WHERE branch.id=:id and genre=:genre";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", branchId);
+        query.setParameter("genre", bookGenre);
+
+        List<Book> books = query.list();
+
+        transaction.commit();
+        session.close();
+
+        return books;
+    }
+
+    public List<String> getBookGenresSpecificByBranch(String branchId) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "SELECT DISTINCT genre FROM Book WHERE branch.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", branchId);
+
+        List<String> bookGenres = query.list();
+
+        transaction.commit();
+        session.close();
+
+        return bookGenres;
     }
 }

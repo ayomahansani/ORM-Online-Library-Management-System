@@ -85,12 +85,12 @@ public class UserRegisterFormController {
 
                 if(isUserSignUp){
 
-                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user_main_form.fxml"));
+                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/login_form.fxml"));
                     Scene scene = new Scene(rootNode);
                     userSignUpPage.getChildren().clear();
                     Stage primaryStage = (Stage) userSignUpPage.getScene().getWindow();
                     primaryStage.setScene(scene);
-                    primaryStage.setTitle("User Main Form");
+                    primaryStage.setTitle("Login Form");
 
                     new Alert(Alert.AlertType.CONFIRMATION, "Signup Success!").show();
 

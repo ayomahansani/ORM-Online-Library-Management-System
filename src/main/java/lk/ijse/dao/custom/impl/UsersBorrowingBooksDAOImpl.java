@@ -1,27 +1,29 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.entity.Users_Borrowing_Books;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class AdminSearchUserHistoryDAOImpl {
-    public List<Users_Borrowing_Books> getAll() {
+public class UsersBorrowingBooksDAOImpl {
+
+    public List<Object[]> getUserHistory(String userName) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "FROM Users_Borrowing_Books";
+        String hql = "SELECT ubb.transactionId,ubb.borrowDate,ubb.returnDate,ubb.isReturn,ubb.user,ubb.book FROM User u JOIN Users_Borrowing_Books ubb ON u.userEmail = ubb.user.userEmail WHERE u.userName = :name";
         Query query = session.createQuery(hql);
+        query.setParameter("name", userName);
 
-        List<Users_Borrowing_Books> usersBorrowingBooks = query.list();
+        List<Object[]> objects = query.list();
 
         transaction.commit();
         session.close();
 
-        return usersBorrowingBooks;
+        return objects;
     }
 }
+

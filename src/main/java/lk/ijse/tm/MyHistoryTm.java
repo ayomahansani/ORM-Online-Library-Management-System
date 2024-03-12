@@ -1,19 +1,22 @@
 package lk.ijse.tm;
 
+
+import javafx.scene.control.Button;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class UserHistoryTm {
+public class MyHistoryTm {
 
+    private String transactionId;
     private String bookTitle;
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private String returnOrNot;
+    private Button returnBtn;
 }

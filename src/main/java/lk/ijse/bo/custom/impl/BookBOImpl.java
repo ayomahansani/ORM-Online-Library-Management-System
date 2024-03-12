@@ -62,4 +62,42 @@ public class BookBOImpl {
         }
         return bookDTOs;
     }
+
+    public List<BookDTO> getBooksSpecificByBranch(String branchId) {
+
+        List<Book> books = bookDAO.getBooksSpecificByBranch(branchId);
+        List<BookDTO> bookDTOs = new ArrayList<>();
+
+        for(Book dto : books){
+            Branch branch = dto.getBranch();
+            BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
+            bookDTOs.add(new BookDTO(dto.getBookId(),dto.getTitle(),dto.getAuthor(),dto.getGenre(),dto.isAvailabilityStatus(),branchDTO));
+        }
+        return bookDTOs;
+
+    }
+
+    public BookDTO isBookAvailable(String bookTitle, String branchId) {
+        Book book = bookDAO.isBookAvailable(bookTitle, branchId);
+        Branch branch = book.getBranch();
+        BranchDTO branchDTO = new BranchDTO(branch.getBranchId(),branch.getBranchAddress(),branch.getBranchTelephone());
+        return new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor(),book.getGenre(),book.isAvailabilityStatus(),branchDTO);
+    }
+
+    public List<BookDTO> getBooksSpecificByGenre(String bookGenre, String branchId) {
+
+        List<Book> books = bookDAO.getBooksSpecificByGenre(bookGenre,branchId);
+        List<BookDTO> bookDTOs = new ArrayList<>();
+
+        for(Book dto : books){
+            Branch branch = dto.getBranch();
+            BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
+            bookDTOs.add(new BookDTO(dto.getBookId(),dto.getTitle(),dto.getAuthor(),dto.getGenre(),dto.isAvailabilityStatus(),branchDTO));
+        }
+        return bookDTOs;
+    }
+
+    public List<String> getBookGenresSpecificByBranch(String branchId) {
+        return bookDAO.getBookGenresSpecificByBranch(branchId);
+    }
 }

@@ -48,22 +48,22 @@
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="btnUsers" layoutX="1.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnUsersOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Users" textFill="WHITE">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Button>
             <Button fx:id="btnBranches" layoutX="1.0" layoutY="455.0" mnemonicParsing="false" onAction="#btnBranchesOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Branches" textFill="WHITE">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Button fx:id="btnBook" layoutX="1.0" layoutY="567.0" mnemonicParsing="false" onAction="#btnBookOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Books" textFill="WHITE">
+            <Button fx:id="btnBook" layoutX="1.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnBookOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Books" textFill="WHITE">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Button>
             <Button fx:id="btnLogout" layoutX="1.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Log Out" textFill="WHITE">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+            <Button fx:id="btnUsers" layoutX="1.0" layoutY="566.0" mnemonicParsing="false" onAction="#btnUsersOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Users" textFill="WHITE">
                 <font>
                     <Font size="18.0" />
                 </font>

@@ -6,6 +6,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -20,8 +21,8 @@ public class Users_Borrowing_Books {    // Transaction table (associated table b
 
     @Id
     private String transactionId;
-    private Date borrowDate;
-    private Date returnDate;
+    private LocalDate borrowDate;
+    private LocalDate returnDate;
     private boolean isReturn;
 
     @ManyToOne  // Transaction has at least one user

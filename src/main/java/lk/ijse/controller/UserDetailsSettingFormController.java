@@ -2,15 +2,18 @@ package lk.ijse.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 import lk.ijse.dto.UserDTO;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class UserDetailsSettingFormController {
 
@@ -35,6 +38,13 @@ public class UserDetailsSettingFormController {
     @FXML
     private TextField txtNewPw;
 
+    @FXML
+    private TextField txtNewName;
+
+    @FXML
+    private Button btnDeleteAccount;
+
+
     private UserBOImpl userBO = new UserBOImpl();
 
     public void initialize(){
@@ -53,26 +63,69 @@ public class UserDetailsSettingFormController {
     @FXML
     void btnChangeOnAction(ActionEvent event) {
 
+        String newName = txtNewName.getText();
         String newEmail = txtNewEmail.getText();
         String newPw = txtNewPw.getText();
         String name = lblName.getText();
 
-        if(!newEmail.isEmpty() && !newPw.isEmpty()){
+        if(!newName.isEmpty() && !newEmail.isEmpty() && !newPw.isEmpty()){
 
-            boolean isDetailsUpdated = userBO.updateUserDetails(name,newEmail,newPw);
+            boolean isDetailsUpdated = userBO.updateUserDetails(name,newName,newEmail,newPw);
 
             if(isDetailsUpdated){
 
+                lblName.setText(newName);
                 lblEmail.setText(newEmail);
                 lblPassword.setText(newPw);
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Changed Successfully!").show();
 
+                txtNewName.setText("");
                 txtNewEmail.setText("");
                 txtNewPw.setText("");
             }
         }
 
+    }
+
+    @FXML
+    void btnDeleteAccountOnAction(ActionEvent event) {
+
+        String email = lblEmail.getText();
+
+        btnDeleteAccount.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove your account?", yes, no).showAndWait();
+
+            if (type.orElse(no) == yes) {
+
+                try{
+
+                    boolean isAccountDeleted = userBO.deleteAccount(email);   // Using loose coupling
+                    if (isAccountDeleted) {
+
+                        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user_register_form.fxml"));
+                        Scene scene = new Scene(rootNode);
+                        settingPage.getChildren().clear();
+                        Stage primaryStage = (Stage) settingPage.getScene().getWindow();
+                        primaryStage.setScene(scene);
+                        primaryStage.setTitle("Register Form");
+
+                        new Alert(Alert.AlertType.CONFIRMATION, "Your account is deleted!").show();
+                    }
+                }catch (Exception ex){
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+        });
+    }
+
+    @FXML
+    void txtNewNameOnAction(ActionEvent event) {
+        txtNewEmail.requestFocus();
     }
 
     @FXML
