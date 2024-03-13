@@ -54,4 +54,15 @@ public class UsersBorrowingBooksBOImpl {
 
     }
 
+    public int setCurrentNumberOfAllBorrowedBooks(String email) {
+        return usersBorrowingBooksDAO.setCurrentNumber(email);
+    }
+
+    public int setCurrentNumberOfReturnedBooks(String email) {
+        return usersBorrowingBooksDAO.setReturnedCurrentNumber(email);
+    }
+
+    public int setCurrentNumberOfHaveToReturnBooks(String email) {
+        return usersBorrowingBooksDAO.setPendingCurrentNumber(email);
+    }
 }

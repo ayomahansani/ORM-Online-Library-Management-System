@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userHistoryForm" prefHeight="652.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminSearchUserFormController">
+<AnchorPane fx:id="userHistoryForm" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminSearchUserFormController">
    <children>
       <TableView fx:id="tblUserBookDetails" layoutX="125.0" layoutY="253.0" opacity="0.8" prefHeight="335.0" prefWidth="937.0" style="-fx-border-color: black; -fx-border-width: 3;">
          <columns>
@@ -28,6 +28,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cmbUsers" layoutX="423.0" layoutY="139.0" onAction="#cmbUsersOnAction" prefHeight="57.0" prefWidth="340.0" promptText="choose user" />
+      <JFXComboBox fx:id="cmbUsers" focusColor="WHITE" layoutX="424.0" layoutY="152.0" onAction="#cmbUsersOnAction" prefHeight="34.0" prefWidth="340.0" promptText="choose user" stylesheets="@../style/comboBox.css" />
    </children>
 </AnchorPane>

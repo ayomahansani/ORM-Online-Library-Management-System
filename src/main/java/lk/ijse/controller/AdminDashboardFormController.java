@@ -91,18 +91,39 @@ public class AdminDashboardFormController {
     }
 
     @FXML
-    void booksViewOnAction(ActionEvent event) {
+    void booksViewOnAction(ActionEvent event) throws IOException {
+        Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/all_books_view_form.fxml"));
+        Scene scene = new Scene(anchorPane);
 
+        Stage stage = new Stage();
+        stage.setTitle("All Books");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     @FXML
-    void branchesViewOnAction(ActionEvent event) {
+    void branchesViewOnAction(ActionEvent event) throws IOException {
+        Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/all_branches_view_form.fxml"));
+        Scene scene = new Scene(anchorPane);
 
+        Stage stage = new Stage();
+        stage.setTitle("All Branches");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     @FXML
-    void usersViewOnAction(ActionEvent event) {
+    void usersViewOnAction(ActionEvent event) throws IOException {
+        Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/all_users_view_form.fxml"));
+        Scene scene = new Scene(anchorPane);
 
+        Stage stage = new Stage();
+        stage.setTitle("All Users");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
 }

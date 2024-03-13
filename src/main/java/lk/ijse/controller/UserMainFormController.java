@@ -95,7 +95,7 @@ public class UserMainFormController {
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
-        Parent form = FXMLLoader.load(getClass().getResource("/view/admin_dashboard_form.fxml"));
+        Parent form = FXMLLoader.load(getClass().getResource("/view/user_dashboard_form.fxml"));
 
         this.user_dashboard.getChildren().clear();
         this.user_dashboard.getChildren().add(form);
@@ -124,6 +124,7 @@ public class UserMainFormController {
         user_dashboard.getChildren().clear();
         Stage primaryStage = (Stage) user_dashboard.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Login Form");
     }
 

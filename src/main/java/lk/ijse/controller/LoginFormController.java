@@ -101,6 +101,7 @@ public class LoginFormController {
                         loginPage.getChildren().clear();
                         Stage primaryStage = (Stage) loginPage.getScene().getWindow();
                         primaryStage.setScene(scene);
+                        primaryStage.centerOnScreen();
                         primaryStage.setTitle("Admin Main Form");
 
                         new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();
@@ -118,6 +119,7 @@ public class LoginFormController {
                         loginPage.getChildren().clear();
                         Stage primaryStage = (Stage) loginPage.getScene().getWindow();
                         primaryStage.setScene(scene);
+                        primaryStage.centerOnScreen();
                         primaryStage.setTitle("User Main Form");
 
                         new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();

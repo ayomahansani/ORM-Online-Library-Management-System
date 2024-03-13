@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="allBranchesViewPage" prefHeight="434.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AllBranchesViewFormController">
+   <children>
+      <TableView fx:id="tblAllBranches" layoutX="22.0" layoutY="21.0" prefHeight="392.0" prefWidth="212.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+         <columns>
+            <TableColumn fx:id="colBranchName" prefWidth="204.0" style="-fx-border-color: grey;" text="Branches" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
