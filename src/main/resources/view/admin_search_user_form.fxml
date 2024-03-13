@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="userHistoryForm" prefHeight="652.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminSearchUserFormController">
    <children>
-      <TableView fx:id="tblUserBookDetails" layoutX="141.0" layoutY="250.0" opacity="0.8" prefHeight="335.0" prefWidth="878.0" style="-fx-border-color: black; -fx-border-width: 3;">
+      <TableView fx:id="tblUserBookDetails" layoutX="125.0" layoutY="253.0" opacity="0.8" prefHeight="335.0" prefWidth="937.0" style="-fx-border-color: black; -fx-border-width: 3;">
          <columns>
-            <TableColumn fx:id="colBookName" prefWidth="352.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Books" />
-            <TableColumn fx:id="colBorrowDate" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Borrow  Date" />
-            <TableColumn fx:id="colReturnDate" prefWidth="171.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return  Date" />
-            <TableColumn fx:id="colReturnOrNot" prefWidth="167.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return Or Not" />
+            <TableColumn fx:id="colBookName" prefWidth="253.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Books" />
+            <TableColumn fx:id="colBorrowDate" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Borrow  Date" />
+            <TableColumn fx:id="colDueDate" prefWidth="165.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Due  Date" />
+            <TableColumn fx:id="colReturnOrNot" prefWidth="179.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return Or Not" />
+            <TableColumn fx:id="colReturnDate" prefWidth="147.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return  Date" />
          </columns>
       </TableView>
       <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="1160.0" style="-fx-background-color: black;" text="User's History" textFill="WHITE">

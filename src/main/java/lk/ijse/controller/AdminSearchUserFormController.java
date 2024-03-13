@@ -33,6 +33,9 @@ public class AdminSearchUserFormController {
     private TableColumn<?, ?> colBorrowDate;
 
     @FXML
+    private TableColumn<?, ?> colDueDate;
+
+    @FXML
     private TableColumn<?, ?> colReturnDate;
 
     @FXML
@@ -84,35 +87,14 @@ public class AdminSearchUserFormController {
             boolean isReturn = historyDto.is_return();
 
             if(isReturn == true){
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getReturn_date(), "Returned"));
+                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Returned"));
             }else {
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getReturn_date(), "Not Returned"));
+                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Not Returned"));
             }
 
         }
 
         tblUserBookDetails.setItems(obList);
-
-        /*ObservableList<UserHistoryTm> obList = FXCollections.observableArrayList();
-
-        List<UsersBorrowingBooksDTO> usersHistory = adminSearchUserHistoryBO.getUserHistory();
-
-        for(UsersBorrowingBooksDTO historyDto : usersHistory){
-
-            BookDTO bookDTO = historyDto.getBookDTO();
-            String bookTitle = bookDTO.getBook_title();
-
-            boolean isReturn = historyDto.is_return();
-
-            if(isReturn == true){
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getReturn_date(), "Returned"));
-            }else {
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getReturn_date(), "Not Returned"));
-            }
-
-        }
-
-        tblUserBookDetails.setItems(obList);*/
 
     }
 
@@ -120,6 +102,7 @@ public class AdminSearchUserFormController {
 
         colBookName.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
         colBorrowDate.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
+        colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         colReturnOrNot.setCellValueFactory(new PropertyValueFactory<>("returnOrNot"));
     }

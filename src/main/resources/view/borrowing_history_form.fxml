@@ -14,14 +14,15 @@
             <Font name="Apple LiSung Light" size="32.0" />
          </font>
       </Label>
-      <TableView fx:id="tblMyTransactionHistory" layoutX="66.0" layoutY="151.0" opacity="0.8" prefHeight="408.0" prefWidth="1029.0" style="-fx-border-color: black; -fx-border-width: 3;">
+      <TableView fx:id="tblMyTransactionHistory" layoutX="27.0" layoutY="151.0" opacity="0.8" prefHeight="408.0" prefWidth="1109.0" style="-fx-border-color: black; -fx-border-width: 3;">
          <columns>
             <TableColumn fx:id="colTransactionId" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Transaction  Id" />
-            <TableColumn fx:id="colBookName" prefWidth="268.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Book Name" />
-            <TableColumn fx:id="colBorrowDate" prefWidth="164.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Borrow  Date" />
-            <TableColumn fx:id="colReturnDate" prefWidth="154.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return  Date" />
-            <TableColumn fx:id="colReturnOrNot" prefWidth="168.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return Or Not" />
-            <TableColumn fx:id="colReturnBtn" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return" />
+            <TableColumn fx:id="colBookName" prefWidth="240.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Book Name" />
+            <TableColumn fx:id="colBorrowDate" prefWidth="151.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Borrow  Date" />
+            <TableColumn fx:id="colDueDate" prefWidth="157.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Due  Date" />
+            <TableColumn fx:id="colReturnOrNot" prefWidth="155.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return Or Not" />
+            <TableColumn fx:id="colReturnBtn" prefWidth="147.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return" />
+            <TableColumn fx:id="colReturnDate" prefWidth="126.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Return  Date" />
          </columns>
       </TableView>
    </children>

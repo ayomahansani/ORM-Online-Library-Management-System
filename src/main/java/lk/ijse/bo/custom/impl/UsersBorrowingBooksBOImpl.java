@@ -26,12 +26,12 @@ public class UsersBorrowingBooksBOImpl {
 
         for(Object[] objects : objectsList) {
 
-            User user = (User) objects[4];
+            User user = (User) objects[5];
             Branch branch = user.getBranch();
             BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
             UserDTO userDTO = new UserDTO(user.getUserEmail(), user.getUserName(), user.getUserPassword(), branchDTO);
 
-            Book book = (Book) objects[5];
+            Book book = (Book) objects[6];
             Branch branch1 = book.getBranch();
             BranchDTO branchDTO1 = new BranchDTO(branch1.getBranchId(), branch1.getBranchAddress(), branch1.getBranchTelephone());
             BookDTO bookDTO = new BookDTO(book.getBookId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailabilityStatus(), branchDTO1);
@@ -41,7 +41,8 @@ public class UsersBorrowingBooksBOImpl {
                             (String) objects[0],
                             (LocalDate) objects[1],
                             (LocalDate) objects[2],
-                            (Boolean) objects[3],
+                            (LocalDate) objects[3],
+                            (Boolean) objects[4],
                             userDTO,
                             bookDTO
                     )
@@ -52,4 +53,5 @@ public class UsersBorrowingBooksBOImpl {
         return usersBorrowingBooksDTOS;
 
     }
+
 }

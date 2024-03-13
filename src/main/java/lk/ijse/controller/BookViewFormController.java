@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.bo.custom.impl.TransactionBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 import lk.ijse.dto.BookDTO;
@@ -48,6 +49,8 @@ public class BookViewFormController {
 
     private TransactionBOImpl transactionBO = new TransactionBOImpl();
     private UserBOImpl userBO = new UserBOImpl();
+
+    private UserBorrowingBooksFormController userBorrowingBooksFormController = new UserBorrowingBooksFormController();
 
     public void initialize(){
         generateNextTransactionId();
@@ -93,7 +96,7 @@ public class BookViewFormController {
         String value = cmbSelectDueDate.getValue();
         String transactionId = lblTransactionId.getText();
         LocalDate borrowDate = LocalDate.now();
-        LocalDate returnDate = LocalDate.parse(lblDueDate.getText());
+        LocalDate dueDate = LocalDate.parse(lblDueDate.getText());
 
         if(!value.isEmpty()){
 
@@ -101,13 +104,18 @@ public class BookViewFormController {
 
             UserDTO userDTO = userBO.getUser(LoginFormController.email);
 
-            UsersBorrowingBooksDTO usersBorrowingBooksDTO = new UsersBorrowingBooksDTO(transactionId, borrowDate, returnDate, false, userDTO, bookDTO);
+            UsersBorrowingBooksDTO usersBorrowingBooksDTO = new UsersBorrowingBooksDTO(transactionId, borrowDate, dueDate, null,false, userDTO, bookDTO);
 
             boolean isBorrow = transactionBO.isBorrowBook(usersBorrowingBooksDTO);
 
             if(isBorrow){
                 new Alert(Alert.AlertType.CONFIRMATION, "Borrow Success!").show();
 
+                // Close the pop up
+                Stage stage = (Stage) this.bookViewPage.getScene().getWindow();
+                stage.close();
+
+                //userBorrowingBooksFormController.initialize();
 
             }
 

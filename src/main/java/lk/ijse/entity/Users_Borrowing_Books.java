@@ -22,6 +22,7 @@ public class Users_Borrowing_Books {    // Transaction table (associated table b
     @Id
     private String transactionId;
     private LocalDate borrowDate;
+    private LocalDate dueDate;
     private LocalDate returnDate;
     private boolean isReturn;
 

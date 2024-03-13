@@ -16,6 +16,7 @@ public class MyHistoryTm {
     private String transactionId;
     private String bookTitle;
     private LocalDate borrowDate;
+    private LocalDate dueDate;
     private LocalDate returnDate;
     private String returnOrNot;
     private Button returnBtn;

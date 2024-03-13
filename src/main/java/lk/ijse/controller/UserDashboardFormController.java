@@ -25,7 +25,7 @@ public class UserDashboardFormController {
         setLblNoOfHaveToReturnBooks();
     }
 
-    private void setLblNoOfHaveToReturnBooks() {
+    private void setLblNoOfBorrowedBooks() {
 
     }
 
@@ -33,7 +33,7 @@ public class UserDashboardFormController {
 
     }
 
-    private void setLblNoOfBorrowedBooks() {
+    private void setLblNoOfHaveToReturnBooks() {
 
     }
 
