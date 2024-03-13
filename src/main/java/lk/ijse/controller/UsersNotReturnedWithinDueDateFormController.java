@@ -7,47 +7,45 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.dto.BranchDTO;
+import lk.ijse.bo.custom.impl.QueryBOImpl;
 import lk.ijse.dto.UserDTO;
-import lk.ijse.tm.BranchTm;
+import lk.ijse.tm.UserHistoryTm;
 import lk.ijse.tm.UserTm;
 
 import java.util.List;
 
-public class AllUsersViewFormController {
+public class UsersNotReturnedWithinDueDateFormController {
 
     @FXML
-    private AnchorPane allUsersViewPage;
+    private AnchorPane popUpPage;
 
     @FXML
-    private TableView<UserTm> tblAllUsers;
+    private TableView<UserTm> tblUsers;
 
     @FXML
     private TableColumn<?, ?> colUsername;
 
-    private UserBOImpl userBO = new UserBOImpl();
+    private QueryBOImpl queryBO = new QueryBOImpl();
 
     public void initialize() {
         setCellValueFactory();
-        loadAllBranches();
+        loadUsersNotReturnedYet();
     }
 
-    private void loadAllBranches() {
+    private void loadUsersNotReturnedYet() {
 
         ObservableList<UserTm> obList = FXCollections.observableArrayList();
 
-        List<UserDTO> allUsers = userBO.getAllUsers();
+        List<UserDTO> allUsers = queryBO.loadUsersNotReturnedYet();
 
         for(UserDTO dto : allUsers){
             obList.add(new UserTm(dto.getUser_email(), dto.getUser_name(), dto.getUser_password()));
         }
 
-        tblAllUsers.setItems(obList);
+        tblUsers.setItems(obList);
     }
 
     private void setCellValueFactory() {
-
         colUsername.setCellValueFactory(new PropertyValueFactory<>("user_name"));
     }
 

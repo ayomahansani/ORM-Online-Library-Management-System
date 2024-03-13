@@ -124,6 +124,7 @@ public class AdminMainFormController {
         admin_dashboard.getChildren().clear();
         Stage primaryStage = (Stage) admin_dashboard.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Login Form");
     }
 
