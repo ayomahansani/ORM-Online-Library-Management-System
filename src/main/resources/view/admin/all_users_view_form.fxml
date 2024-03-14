@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="allUsersViewPage" prefHeight="434.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.AllUsersViewFormController">
+   <children>
+      <TableView fx:id="tblAllUsers" layoutX="22.0" layoutY="21.0" prefHeight="392.0" prefWidth="212.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+         <columns>
+            <TableColumn fx:id="colUsername" prefWidth="204.0" style="-fx-border-color: grey;" text="Useres" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
