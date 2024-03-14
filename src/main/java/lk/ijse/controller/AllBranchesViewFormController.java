@@ -7,10 +7,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BranchBO;
 import lk.ijse.bo.custom.impl.BranchBOImpl;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.tm.BranchTm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AllBranchesViewFormController {
@@ -24,7 +27,7 @@ public class AllBranchesViewFormController {
     @FXML
     private TableColumn<?, ?> colBranchName;
 
-    private BranchBOImpl branchBO = new BranchBOImpl();
+    private BranchBO branchBO = (BranchBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BRANCH);
 
     public void initialize() {
         setCellValueFactory();
@@ -35,13 +38,18 @@ public class AllBranchesViewFormController {
 
         ObservableList<BranchTm> obList = FXCollections.observableArrayList();
 
-        List<BranchDTO> allBranches = branchBO.getAllBranches();
+        try{
+            List<BranchDTO> allBranches = branchBO.getAllBranches();
 
-        for(BranchDTO dto : allBranches){
-            obList.add(new BranchTm(dto.getBranch_id(), dto.getBranch_address(), dto.getBranch_telephone()));
+            for(BranchDTO dto : allBranches){
+                obList.add(new BranchTm(dto.getBranch_id(), dto.getBranch_address(), dto.getBranch_telephone()));
+            }
+
+            tblAllBranches.setItems(obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblAllBranches.setItems(obList);
     }
 
     private void setCellValueFactory() {

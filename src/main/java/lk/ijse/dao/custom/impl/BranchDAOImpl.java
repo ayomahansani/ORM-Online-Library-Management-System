@@ -1,7 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.entity.Book;
+import lk.ijse.dao.custom.BranchDAO;
 import lk.ijse.entity.Branch;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,7 +9,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class BranchDAOImpl {
+public class BranchDAOImpl implements BranchDAO {
+
+    @Override
     public Branch getBranchByAddress(String branchAddress) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -27,6 +29,7 @@ public class BranchDAOImpl {
         return branch;
     }
 
+    @Override
     public List<Branch> getAll() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -43,6 +46,7 @@ public class BranchDAOImpl {
         return branches;
     }
 
+    @Override
     public int setCurrentNumber() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -59,6 +63,7 @@ public class BranchDAOImpl {
         return Math.toIntExact(count);  // convert a long value to an int value
     }
 
+    @Override
     public boolean save(Branch branch) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -72,6 +77,7 @@ public class BranchDAOImpl {
         return true;
     }
 
+    @Override
     public boolean update(Branch branch) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -85,6 +91,7 @@ public class BranchDAOImpl {
         return true;
     }
 
+    @Override
     public boolean delete(String id) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -100,6 +107,7 @@ public class BranchDAOImpl {
         return true;
     }
 
+    @Override
     public Branch search(String branchAddress) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -118,6 +126,7 @@ public class BranchDAOImpl {
 
     }
 
+    @Override
     public String generateNextId() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -134,7 +143,8 @@ public class BranchDAOImpl {
         return splitId(id);
     }
 
-    private String splitId(String currentBranchId) {
+    @Override
+    public String splitId(String currentBranchId) {
 
         if(currentBranchId != null) {
             String[] split = currentBranchId.split("Br0");

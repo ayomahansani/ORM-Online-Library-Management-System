@@ -1,14 +1,18 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAOImpl {
+public class UserDAOImpl implements UserDAO {
+
+    @Override
     public boolean save(User user) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -22,6 +26,7 @@ public class UserDAOImpl {
         return true;
     }
 
+    @Override
     public boolean checkUserCredential(String email, String password) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -49,6 +54,7 @@ public class UserDAOImpl {
         return false;
     }
 
+    @Override
     public int setCurrentNumber() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -65,6 +71,7 @@ public class UserDAOImpl {
         return Math.toIntExact(count);      // convert a long value to an int value
     }
 
+    @Override
     public String getName(String email) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -82,12 +89,13 @@ public class UserDAOImpl {
         return name;
     }
 
+    @Override
     public boolean updateUserDetails(String name, String newName, String newEmail, String newPw) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "UPDATE User SET userName = :username, userEmail = :email, userPassword = :pw WHERE userName = :name";
+        String hql = "UPDATE User SET userName=:username,userEmail=:email,userPassword=:pw WHERE userName=:name";
         Query query = session.createQuery(hql);
         query.setParameter("username", newName);
         query.setParameter("email", newEmail);
@@ -104,6 +112,7 @@ public class UserDAOImpl {
         return updated;
     }
 
+    @Override
     public List<User> getAll() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -120,6 +129,7 @@ public class UserDAOImpl {
         return users;
     }
 
+    @Override
     public boolean delete(String email) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -135,6 +145,7 @@ public class UserDAOImpl {
         return true;
     }
 
+    @Override
     public String getUserBranch(String email) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -153,6 +164,7 @@ public class UserDAOImpl {
 
     }
 
+    @Override
     public User getUser(String email) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -165,4 +177,25 @@ public class UserDAOImpl {
 
         return user;
     }
+
+    @Override
+    public boolean update(User entity) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public User search(String name) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String generateNextId() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String splitId(String currentId) throws SQLException {
+        return null;
+    }
+
 }

@@ -1,6 +1,9 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.TransactionBO;
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.TransactionDAO;
 import lk.ijse.dao.custom.impl.TransactionDAOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BranchDTO;
@@ -14,22 +17,24 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class TransactionBOImpl {
+public class TransactionBOImpl implements TransactionBO {
 
-    private TransactionDAOImpl transactionDAO = new TransactionDAOImpl();
+    private TransactionDAO transactionDAO = (TransactionDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.TRANSACTION);
 
-    public String generateNextTransactionId() {
+    @Override
+    public String generateNextTransactionId() throws SQLException {
         return transactionDAO.generateNextId();
     }
 
+    @Override
     public boolean isBorrowBook(UsersBorrowingBooksDTO dto) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
 
-        // Insert transaction values
 
         UserDTO userDTO = dto.getUserDTO();
         BranchDTO branchDTO = userDTO.getBranchDTO();
@@ -52,14 +57,12 @@ public class TransactionBOImpl {
                 book
         );
 
-        session.persist(usersBorrowingBooks);
+        session.persist(usersBorrowingBooks);   // Insert transaction values to Users_Borrowing_Books entity
 
-
-        // Update book availability
 
         book.setAvailabilityStatus(false);
 
-        session.update(book);
+        session.update(book);   // Update book entity as availability status false
 
         transaction.commit();
         session.close();
@@ -67,6 +70,8 @@ public class TransactionBOImpl {
         return true;
     }
 
+
+    @Override
     public boolean updateIsReturn(UsersBorrowingBooksDTO dto) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -94,11 +99,11 @@ public class TransactionBOImpl {
                 book
         );
 
-        session.update(usersBorrowingBooks);
+        session.update(usersBorrowingBooks);    // Update Users_Borrowing_Books entity
 
         book.setAvailabilityStatus(true);
 
-        session.update(book);
+        session.update(book);   // Update book entity as availability status false
 
 
         transaction.commit();

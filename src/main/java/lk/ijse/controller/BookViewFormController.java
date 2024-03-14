@@ -10,15 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.TransactionBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.TransactionBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 import lk.ijse.dto.BookDTO;
-import lk.ijse.dto.BranchDTO;
 import lk.ijse.dto.UserDTO;
 import lk.ijse.dto.UsersBorrowingBooksDTO;
-import lk.ijse.entity.Book;
-import lk.ijse.entity.Branch;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class BookViewFormController {
@@ -47,10 +48,9 @@ public class BookViewFormController {
     @FXML
     private Label lblDueDate;
 
-    private TransactionBOImpl transactionBO = new TransactionBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+    private TransactionBO transactionBO = (TransactionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.TRANSACTION);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
-    private UserBorrowingBooksFormController userBorrowingBooksFormController = new UserBorrowingBooksFormController();
 
     public void initialize(){
         generateNextTransactionId();
@@ -59,8 +59,14 @@ public class BookViewFormController {
     }
 
     private void generateNextTransactionId() {
-        String transactionId = transactionBO.generateNextTransactionId();    // Using loose coupling
-        lblTransactionId.setText(transactionId);
+        try{
+
+            String transactionId = transactionBO.generateNextTransactionId();    // Using loose coupling
+            lblTransactionId.setText(transactionId);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setBookDetails() {
@@ -100,23 +106,27 @@ public class BookViewFormController {
 
         if(!value.isEmpty()){
 
-            BookDTO bookDTO = UserBorrowingBooksFormController.bookDTO;
+            try{
 
-            UserDTO userDTO = userBO.getUser(LoginFormController.email);
+                BookDTO bookDTO = UserBorrowingBooksFormController.bookDTO;
 
-            UsersBorrowingBooksDTO usersBorrowingBooksDTO = new UsersBorrowingBooksDTO(transactionId, borrowDate, dueDate, null,false, userDTO, bookDTO);
+                UserDTO userDTO = userBO.getUser(LoginFormController.email);
 
-            boolean isBorrow = transactionBO.isBorrowBook(usersBorrowingBooksDTO);
+                UsersBorrowingBooksDTO usersBorrowingBooksDTO = new UsersBorrowingBooksDTO(transactionId, borrowDate, dueDate, null,false, userDTO, bookDTO);
 
-            if(isBorrow){
-                new Alert(Alert.AlertType.CONFIRMATION, "Borrow Success!").show();
+                boolean isBorrow = transactionBO.isBorrowBook(usersBorrowingBooksDTO);
 
-                // Close the pop up
-                Stage stage = (Stage) this.bookViewPage.getScene().getWindow();
-                stage.close();
+                if(isBorrow){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Borrow Success!").show();
 
-                //userBorrowingBooksFormController.initialize();
+                    // Close the popUp
+                    Stage stage = (Stage) this.bookViewPage.getScene().getWindow();
+                    stage.close();
 
+                }
+
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         }else {

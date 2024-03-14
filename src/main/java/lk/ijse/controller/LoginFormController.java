@@ -13,11 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.AdminBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.AdminBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class LoginFormController {
 
@@ -42,8 +44,8 @@ public class LoginFormController {
     @FXML
     private Button btnForgotPassword;
 
-    private AdminBOImpl adminBO = new AdminBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+    private AdminBO adminBO = (AdminBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADMIN);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     static String email;
     static String password;

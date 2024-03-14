@@ -1,19 +1,26 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.AdminBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.AdminDAO;
 import lk.ijse.dao.custom.impl.AdminDAOImpl;
 import lk.ijse.dao.custom.impl.UserDAOImpl;
 import lk.ijse.dto.AdminDTO;
 import lk.ijse.entity.Admin;
 
-public class AdminBOImpl {
+import java.sql.SQLException;
 
-    private AdminDAOImpl adminDAO = new AdminDAOImpl();
+public class AdminBOImpl implements AdminBO {
 
-    public boolean saveAdminSignUp(AdminDTO adminDTO) {
+    private AdminDAO adminDAO = (AdminDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ADMIN);
+
+    @Override
+    public boolean saveAdminSignUp(AdminDTO adminDTO) throws SQLException {
         return adminDAO.save(new Admin(adminDTO.getAdmin_email(),adminDTO.getAdmin_name(),adminDTO.getAdmin_password()));
     }
 
-    public boolean checkAdminCredential(String email, String password) {
-        return adminDAO.checkAdminCredentia(email, password);
+    @Override
+    public boolean checkAdminCredential(String email, String password) throws SQLException {
+        return adminDAO.checkAdminCredential(email, password);
     }
 }

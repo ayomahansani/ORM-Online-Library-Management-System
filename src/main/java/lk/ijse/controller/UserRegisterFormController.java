@@ -13,12 +13,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BranchBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.BranchBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.dto.UserDTO;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserRegisterFormController {
@@ -44,8 +48,9 @@ public class UserRegisterFormController {
     @FXML
     private Button btnLoginHere;
 
-    private BranchBOImpl branchBO = new BranchBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+    private BranchBO branchBO = (BranchBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BRANCH);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+
 
     public void initialize(){
         loadBranchAddress();
@@ -55,14 +60,19 @@ public class UserRegisterFormController {
 
         ObservableList<String> obList = FXCollections.observableArrayList();
 
-        List<BranchDTO> branchDTOS = branchBO.getAllBranches();
+        try{
 
-        for(BranchDTO dto : branchDTOS){
-            obList.add(dto.getBranch_address());
+            List<BranchDTO> branchDTOS = branchBO.getAllBranches();
+
+            for(BranchDTO dto : branchDTOS){
+                obList.add(dto.getBranch_address());
+            }
+
+            cmbBranchAddress.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        cmbBranchAddress.setItems(obList);
-
     }
 
     @FXML

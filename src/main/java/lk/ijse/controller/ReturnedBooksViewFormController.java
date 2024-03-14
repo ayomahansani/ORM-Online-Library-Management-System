@@ -7,12 +7,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.QueryBO;
+import lk.ijse.bo.custom.UserBO;
+import lk.ijse.bo.custom.impl.QueryBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.bo.custom.impl.UsersBorrowingBooksBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.UsersBorrowingBooksDTO;
 import lk.ijse.tm.UserHistoryTm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReturnedBooksViewFormController {
@@ -29,8 +33,10 @@ public class ReturnedBooksViewFormController {
     @FXML
     private TableColumn<?, ?> colReturnedDate;
 
-    private UsersBorrowingBooksBOImpl usersBorrowingBooksBO = new UsersBorrowingBooksBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    private QueryBO queryBO = (QueryBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.QUERY);
+
 
     public void initialize(){
         loadReturnedBooks();
@@ -41,23 +47,29 @@ public class ReturnedBooksViewFormController {
 
         ObservableList<UserHistoryTm> obList = FXCollections.observableArrayList();
 
-        String username = userBO.getName(LoginFormController.email);
+        try{
 
-        List<UsersBorrowingBooksDTO> usersHistory = usersBorrowingBooksBO.getUserHistory(username);
+            String username = userBO.getName(LoginFormController.email);
 
-        for(UsersBorrowingBooksDTO historyDto : usersHistory){
+            List<UsersBorrowingBooksDTO> usersHistory = queryBO.getUserHistory(username);
 
-            BookDTO bookDTO = historyDto.getBookDTO();
-            String bookTitle = bookDTO.getBook_title();
+            for(UsersBorrowingBooksDTO historyDto : usersHistory){
 
-            boolean isReturn = historyDto.is_return();
+                BookDTO bookDTO = historyDto.getBookDTO();
+                String bookTitle = bookDTO.getBook_title();
 
-            if(isReturn == true){
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Returned"));
+                boolean isReturn = historyDto.is_return();
+
+                if(isReturn == true){
+                    obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Returned"));
+                }
             }
-        }
 
-        tblReturnedBooks.setItems(obList);
+            tblReturnedBooks.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setCellValueFactory() {

@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.dao.custom.BookDAO;
 import lk.ijse.entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,7 +9,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class BookDAOImpl {
+public class BookDAOImpl implements BookDAO {
+
+    @Override
     public int setCurrentNumber() {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
@@ -24,6 +27,7 @@ public class BookDAOImpl {
         return Math.toIntExact(count);      // convert a long value to an int value
     }
 
+    @Override
     public boolean save(Book book) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -37,6 +41,7 @@ public class BookDAOImpl {
         return true;
     }
 
+    @Override
     public boolean update(Book book) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -50,6 +55,7 @@ public class BookDAOImpl {
         return true;
     }
 
+    @Override
     public boolean delete(String id) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -65,6 +71,7 @@ public class BookDAOImpl {
         return true;
     }
 
+    @Override
     public Book search(String bookTitle) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -82,6 +89,7 @@ public class BookDAOImpl {
         return book;
     }
 
+    @Override
     public String generateNextId() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -98,7 +106,8 @@ public class BookDAOImpl {
         return splitId(id);
     }
 
-    private String splitId(String currentBookId) {
+    @Override
+    public String splitId(String currentBookId) {
 
         if(currentBookId != null) {
             String[] split = currentBookId.split("B0");
@@ -114,6 +123,7 @@ public class BookDAOImpl {
         }
     }
 
+    @Override
     public List<Book> getAll() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -130,6 +140,7 @@ public class BookDAOImpl {
         return books;
     }
 
+    @Override
     public List<Book> getBooksSpecificByBranch(String branchId) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -147,6 +158,7 @@ public class BookDAOImpl {
         return books;
     }
 
+    @Override
     public Book isBookAvailable(String bookTitle, String branchId) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -165,6 +177,7 @@ public class BookDAOImpl {
         return book;
     }
 
+    @Override
     public List<Book> getBooksSpecificByGenre(String bookGenre, String branchId) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -183,6 +196,7 @@ public class BookDAOImpl {
         return books;
     }
 
+    @Override
     public List<String> getBookGenresSpecificByBranch(String branchId) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();

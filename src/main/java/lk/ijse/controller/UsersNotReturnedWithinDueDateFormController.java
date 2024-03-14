@@ -7,11 +7,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.QueryBO;
 import lk.ijse.bo.custom.impl.QueryBOImpl;
 import lk.ijse.dto.UserDTO;
-import lk.ijse.tm.UserHistoryTm;
 import lk.ijse.tm.UserTm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UsersNotReturnedWithinDueDateFormController {
@@ -25,7 +27,8 @@ public class UsersNotReturnedWithinDueDateFormController {
     @FXML
     private TableColumn<?, ?> colUsername;
 
-    private QueryBOImpl queryBO = new QueryBOImpl();
+    private QueryBO queryBO = (QueryBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.QUERY);
+
 
     public void initialize() {
         setCellValueFactory();
@@ -36,13 +39,19 @@ public class UsersNotReturnedWithinDueDateFormController {
 
         ObservableList<UserTm> obList = FXCollections.observableArrayList();
 
-        List<UserDTO> allUsers = queryBO.loadUsersNotReturnedYet();
+        try{
 
-        for(UserDTO dto : allUsers){
-            obList.add(new UserTm(dto.getUser_email(), dto.getUser_name(), dto.getUser_password()));
+            List<UserDTO> allUsers = queryBO.loadUsersNotReturnedYet();
+
+            for(UserDTO dto : allUsers){
+                obList.add(new UserTm(dto.getUser_email(), dto.getUser_name(), dto.getUser_password()));
+            }
+
+            tblUsers.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblUsers.setItems(obList);
     }
 
     private void setCellValueFactory() {

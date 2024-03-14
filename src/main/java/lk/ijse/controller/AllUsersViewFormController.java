@@ -7,12 +7,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.dto.BranchDTO;
 import lk.ijse.dto.UserDTO;
-import lk.ijse.tm.BranchTm;
 import lk.ijse.tm.UserTm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AllUsersViewFormController {
@@ -26,7 +27,7 @@ public class AllUsersViewFormController {
     @FXML
     private TableColumn<?, ?> colUsername;
 
-    private UserBOImpl userBO = new UserBOImpl();
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     public void initialize() {
         setCellValueFactory();
@@ -37,13 +38,19 @@ public class AllUsersViewFormController {
 
         ObservableList<UserTm> obList = FXCollections.observableArrayList();
 
-        List<UserDTO> allUsers = userBO.getAllUsers();
+        try{
 
-        for(UserDTO dto : allUsers){
-            obList.add(new UserTm(dto.getUser_email(), dto.getUser_name(), dto.getUser_password()));
+            List<UserDTO> allUsers = userBO.getAllUsers();
+
+            for(UserDTO dto : allUsers){
+                obList.add(new UserTm(dto.getUser_email(), dto.getUser_name(), dto.getUser_password()));
+            }
+
+            tblAllUsers.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblAllUsers.setItems(obList);
     }
 
     private void setCellValueFactory() {

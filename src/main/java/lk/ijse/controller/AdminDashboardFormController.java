@@ -8,11 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.bo.custom.BranchBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.BranchBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AdminDashboardFormController {
 
@@ -28,30 +33,42 @@ public class AdminDashboardFormController {
     @FXML
     private Label lblNoOfBranches;
 
-    private BranchBOImpl branchBO = new BranchBOImpl();
-    private BookBOImpl bookBO = new BookBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+    private BranchBO branchBO = (BranchBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BRANCH);
+    private BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
 
-    public void initialize(){
+    public void initialize() throws SQLException {
         setLblNoOfUsers();
         setLblNoOfBooks();
         setLblNoOfBranches();
     }
 
-    private void setLblNoOfBranches() {
-        int noOfBranches = branchBO.setCurrentNumberOfBranches();
-        lblNoOfBranches.setText(String.valueOf(noOfBranches));
+    private void setLblNoOfBranches(){
+        try{
+            int noOfBranches = branchBO.setCurrentNumberOfBranches();
+            lblNoOfBranches.setText(String.valueOf(noOfBranches));
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setLblNoOfBooks() {
-        int noOfBooks = bookBO.setCurrentNumberOfBooks();
-        lblNoOfBooks.setText(String.valueOf(noOfBooks));
+        try{
+            int noOfBooks = bookBO.setCurrentNumberOfBooks();
+            lblNoOfBooks.setText(String.valueOf(noOfBooks));
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setLblNoOfUsers() {
-        int noOfUsers = userBO.setCurrentNumberOfUsers();
-        lblNoOfUsers.setText(String.valueOf(noOfUsers));
+        try{
+            int noOfUsers = userBO.setCurrentNumberOfUsers();
+            lblNoOfUsers.setText(String.valueOf(noOfUsers));
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

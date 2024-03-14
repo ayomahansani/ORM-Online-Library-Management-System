@@ -1,42 +1,52 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.UserBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.dao.custom.impl.UserDAOImpl;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.dto.UserDTO;
 import lk.ijse.entity.Branch;
 import lk.ijse.entity.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserBOImpl {
+public class UserBOImpl implements UserBO {
 
-    private UserDAOImpl userDAO = new UserDAOImpl();
+    private UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
-    public boolean saveUserSignUp(UserDTO userDTO) {
+    @Override
+    public boolean saveUserSignUp(UserDTO userDTO) throws SQLException {
         BranchDTO branchDTO = userDTO.getBranchDTO();
         Branch branch = new Branch(branchDTO.getBranch_id(),branchDTO.getBranch_address(), branchDTO.getBranch_telephone(),null,null);
 
         return userDAO.save(new User(userDTO.getUser_email(),userDTO.getUser_name(),userDTO.getUser_password(),branch,null));
     }
 
-    public int setCurrentNumberOfUsers() {
+    @Override
+    public int setCurrentNumberOfUsers() throws SQLException {
         return userDAO.setCurrentNumber();
     }
 
-    public boolean checkUserCredential(String email, String password) {
+    @Override
+    public boolean checkUserCredential(String email, String password) throws SQLException {
         return userDAO.checkUserCredential(email, password);
     }
 
-    public String getName(String email) {
+    @Override
+    public String getName(String email) throws SQLException {
         return userDAO.getName(email);
     }
 
-    public boolean updateUserDetails(String name, String newName, String newEmail, String newPw) {
+    @Override
+    public boolean updateUserDetails(String name, String newName, String newEmail, String newPw) throws SQLException {
         return userDAO.updateUserDetails(name,newName,newEmail,newPw);
     }
 
-    public List<UserDTO> getAllUsers() {
+    @Override
+    public List<UserDTO> getAllUsers() throws SQLException {
 
         List<User> users = userDAO.getAll();
         List<UserDTO> userDTOS = new ArrayList<>();
@@ -50,15 +60,18 @@ public class UserBOImpl {
         return userDTOS;
     }
 
-    public boolean deleteAccount(String email) {
+    @Override
+    public boolean deleteAccount(String email) throws SQLException {
         return userDAO.delete(email);
     }
 
-    public String getUserBranch(String email) {
+    @Override
+    public String getUserBranch(String email) throws SQLException {
         return userDAO.getUserBranch(email);
     }
 
-    public UserDTO getUser(String email) {
+    @Override
+    public UserDTO getUser(String email) throws SQLException {
 
         User user = userDAO.getUser(email);
         Branch branch = user.getBranch();

@@ -8,12 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.dto.UserDTO;
 
-import java.util.List;
+import java.sql.SQLException;
 import java.util.Optional;
-import java.util.regex.Pattern;
+
 
 public class UserDetailsSettingFormController {
 
@@ -45,7 +46,7 @@ public class UserDetailsSettingFormController {
     private Button btnDeleteAccount;
 
 
-    private UserBOImpl userBO = new UserBOImpl();
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     public void initialize(){
         loadUserDetails(LoginFormController.email, LoginFormController.password);
@@ -53,11 +54,18 @@ public class UserDetailsSettingFormController {
 
     public void loadUserDetails(String email, String password){
 
-        String name = userBO.getName(email);
+        try{
 
-        lblName.setText(name);
-        lblEmail.setText(email);
-        lblPassword.setText(password);
+            String name = userBO.getName(email);
+
+            lblName.setText(name);
+            lblEmail.setText(email);
+            lblPassword.setText(password);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @FXML
@@ -70,19 +78,25 @@ public class UserDetailsSettingFormController {
 
         if(!newName.isEmpty() && !newEmail.isEmpty() && !newPw.isEmpty()){
 
-            boolean isDetailsUpdated = userBO.updateUserDetails(name,newName,newEmail,newPw);
+            try{
 
-            if(isDetailsUpdated){
+                boolean isDetailsUpdated = userBO.updateUserDetails(name,newName,newEmail,newPw);
 
-                lblName.setText(newName);
-                lblEmail.setText(newEmail);
-                lblPassword.setText(newPw);
+                if(isDetailsUpdated){
 
-                new Alert(Alert.AlertType.CONFIRMATION, "Changed Successfully!").show();
+                    lblName.setText(newName);
+                    lblEmail.setText(newEmail);
+                    lblPassword.setText(newPw);
 
-                txtNewName.setText("");
-                txtNewEmail.setText("");
-                txtNewPw.setText("");
+                    new Alert(Alert.AlertType.CONFIRMATION, "Changed Successfully!").show();
+
+                    txtNewName.setText("");
+                    txtNewEmail.setText("");
+                    txtNewPw.setText("");
+                }
+
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
 

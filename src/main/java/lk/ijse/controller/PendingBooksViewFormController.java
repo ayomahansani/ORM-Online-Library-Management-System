@@ -7,13 +7,18 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.QueryBO;
+import lk.ijse.bo.custom.TransactionBO;
+import lk.ijse.bo.custom.UserBO;
+import lk.ijse.bo.custom.impl.QueryBOImpl;
 import lk.ijse.bo.custom.impl.TransactionBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.bo.custom.impl.UsersBorrowingBooksBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.UsersBorrowingBooksDTO;
 import lk.ijse.tm.MyHistoryTm;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +42,12 @@ public class PendingBooksViewFormController {
     @FXML
     private TableColumn<?, ?> colReturnDate;
 
-    private UsersBorrowingBooksBOImpl usersBorrowingBooksBO = new UsersBorrowingBooksBOImpl();
-    private TransactionBOImpl transactionBO = new TransactionBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+
+    private TransactionBO transactionBO = (TransactionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.TRANSACTION);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    private QueryBO queryBO = (QueryBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.QUERY);
+
+
     public void initialize(){
         loadPendingBooks();
         setCellValueFactory();
@@ -49,27 +57,33 @@ public class PendingBooksViewFormController {
 
         ObservableList<MyHistoryTm> obList = FXCollections.observableArrayList();
 
-        String username = userBO.getName(LoginFormController.email);
+        try{
 
-        List<UsersBorrowingBooksDTO> myHistory = usersBorrowingBooksBO.getUserHistory(username);
+            String username = userBO.getName(LoginFormController.email);
 
-        for(UsersBorrowingBooksDTO historyDto : myHistory){
+            List<UsersBorrowingBooksDTO> myHistory = queryBO.getUserHistory(username);
 
-            BookDTO bookDTO = historyDto.getBookDTO();
-            String bookTitle = bookDTO.getBook_title();
-            boolean isReturn = historyDto.is_return();
+            for(UsersBorrowingBooksDTO historyDto : myHistory){
 
-            Button returnBtn = new Button("Return Now");
+                BookDTO bookDTO = historyDto.getBookDTO();
+                String bookTitle = bookDTO.getBook_title();
+                boolean isReturn = historyDto.is_return();
 
-            setReturnBtnAction(returnBtn, historyDto);
-            returnBtn.setCursor(Cursor.HAND);
+                Button returnBtn = new Button("Return Now");
 
-            if(isReturn == false){
-                obList.add(new MyHistoryTm(historyDto.getTransaction_id(),bookTitle,historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(),"Not Returned",returnBtn));
+                setReturnBtnAction(returnBtn, historyDto);
+                returnBtn.setCursor(Cursor.HAND);
+
+                if(isReturn == false){
+                    obList.add(new MyHistoryTm(historyDto.getTransaction_id(),bookTitle,historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(),"Not Returned",returnBtn));
+                }
             }
-        }
 
-        tblPendingBooks.setItems(obList);
+            tblPendingBooks.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -83,47 +97,23 @@ public class PendingBooksViewFormController {
 
             if (type.orElse(no) == yes) {
 
-                boolean updateIsReturnAndAvailabilityStatus = transactionBO.updateIsReturn(dto);
+                try{
 
-                if(updateIsReturnAndAvailabilityStatus){
+                    boolean updateIsReturnAndAvailabilityStatus = transactionBO.updateIsReturn(dto);
 
-                    initialize();
+                    if(updateIsReturnAndAvailabilityStatus){
 
-                    new Alert(Alert.AlertType.INFORMATION, "Book Returned Successfully!").show();
+                        initialize();
+
+                        new Alert(Alert.AlertType.INFORMATION, "Book Returned Successfully!").show();
+                    }
+
+                }catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
     }
-
- /*   private void updatePendingBooks() {
-
-        ObservableList<MyHistoryTm> obList = FXCollections.observableArrayList();
-
-        String username = userBO.getName(LoginFormController.email);
-
-        List<UsersBorrowingBooksDTO> myHistory = usersBorrowingBooksBO.getUserHistory(username);
-
-        for(UsersBorrowingBooksDTO historyDto : myHistory){
-
-            BookDTO bookDTO = historyDto.getBookDTO();
-            String bookTitle = bookDTO.getBook_title();
-            boolean isReturn = historyDto.is_return();
-
-            Button returnBtn = new Button("Return Now");
-
-            setReturnBtnAction(returnBtn, historyDto);
-            returnBtn.setCursor(Cursor.HAND);
-
-            if(isReturn == false){
-                returnBtn.setDisable(true);
-                obList.add(new MyHistoryTm(historyDto.getTransaction_id(),bookTitle,historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(),"Returned",returnBtn));
-            }else {
-                obList.add(new MyHistoryTm(historyDto.getTransaction_id(),bookTitle,historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(),"Not Returned",returnBtn));
-            }
-        }
-
-        tblPendingBooks.setItems(obList);
-    }*/
 
     private void setCellValueFactory() {
         colBookTitle.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));

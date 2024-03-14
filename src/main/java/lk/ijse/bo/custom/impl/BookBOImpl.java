@@ -1,23 +1,29 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.BookDAO;
 import lk.ijse.dao.custom.impl.BookDAOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.entity.Book;
 import lk.ijse.entity.Branch;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookBOImpl {
+public class BookBOImpl implements BookBO {
 
-    private BookDAOImpl bookDAO = new BookDAOImpl();
+    private BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
 
-    public int setCurrentNumberOfBooks() {
+    @Override
+    public int setCurrentNumberOfBooks() throws SQLException {
         return bookDAO.setCurrentNumber();
     }
 
-    public boolean saveBook(BookDTO bookDTO) {
+    @Override
+    public boolean saveBook(BookDTO bookDTO) throws SQLException {
         BranchDTO dto = bookDTO.getBranchDTO();
         Branch branch = new Branch(dto.getBranch_id(),dto.getBranch_address(),dto.getBranch_telephone(),null,null);
 
@@ -26,7 +32,8 @@ public class BookBOImpl {
 
     }
 
-    public boolean updateBook(BookDTO bookDTO) {
+    @Override
+    public boolean updateBook(BookDTO bookDTO) throws SQLException {
         BranchDTO dto = bookDTO.getBranchDTO();
         Branch branch = new Branch(dto.getBranch_id(),dto.getBranch_address(),dto.getBranch_telephone(),null,null);
 
@@ -34,11 +41,13 @@ public class BookBOImpl {
                 bookDTO.getBook_id(),bookDTO.getBook_title(), bookDTO.getBook_author(), bookDTO.getBook_genre(), bookDTO.isAvailability_status(),branch,null));
     }
 
-    public boolean deleteBook(String id) {
+    @Override
+    public boolean deleteBook(String id) throws SQLException {
         return bookDAO.delete(id);
     }
 
-    public BookDTO searchBook(String bookTitle) {
+    @Override
+    public BookDTO searchBook(String bookTitle) throws SQLException {
         Book book = bookDAO.search(bookTitle);
         Branch branch = book.getBranch();
         BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
@@ -46,11 +55,13 @@ public class BookBOImpl {
         return new BookDTO(book.getBookId(), book.getTitle(), book.getAuthor(), book.getGenre(),book.isAvailabilityStatus(),branchDTO);
     }
 
-    public String generateNextBookId() {
+    @Override
+    public String generateNextBookId() throws SQLException {
         return bookDAO.generateNextId();
     }
 
-    public List<BookDTO> getAllBooks() {
+    @Override
+    public List<BookDTO> getAllBooks() throws SQLException {
 
         List<Book> books = bookDAO.getAll();
         List<BookDTO> bookDTOs = new ArrayList<>();
@@ -63,7 +74,8 @@ public class BookBOImpl {
         return bookDTOs;
     }
 
-    public List<BookDTO> getBooksSpecificByBranch(String branchId) {
+    @Override
+    public List<BookDTO> getBooksSpecificByBranch(String branchId) throws SQLException {
 
         List<Book> books = bookDAO.getBooksSpecificByBranch(branchId);
         List<BookDTO> bookDTOs = new ArrayList<>();
@@ -77,14 +89,16 @@ public class BookBOImpl {
 
     }
 
-    public BookDTO isBookAvailable(String bookTitle, String branchId) {
+    @Override
+    public BookDTO isBookAvailable(String bookTitle, String branchId) throws SQLException {
         Book book = bookDAO.isBookAvailable(bookTitle, branchId);
         Branch branch = book.getBranch();
         BranchDTO branchDTO = new BranchDTO(branch.getBranchId(),branch.getBranchAddress(),branch.getBranchTelephone());
         return new BookDTO(book.getBookId(),book.getTitle(),book.getAuthor(),book.getGenre(),book.isAvailabilityStatus(),branchDTO);
     }
 
-    public List<BookDTO> getBooksSpecificByGenre(String bookGenre, String branchId) {
+    @Override
+    public List<BookDTO> getBooksSpecificByGenre(String bookGenre, String branchId) throws SQLException {
 
         List<Book> books = bookDAO.getBooksSpecificByGenre(bookGenre,branchId);
         List<BookDTO> bookDTOs = new ArrayList<>();
@@ -97,7 +111,8 @@ public class BookBOImpl {
         return bookDTOs;
     }
 
-    public List<String> getBookGenresSpecificByBranch(String branchId) {
+    @Override
+    public List<String> getBookGenresSpecificByBranch(String branchId) throws SQLException {
         return bookDAO.getBookGenresSpecificByBranch(branchId);
     }
 }

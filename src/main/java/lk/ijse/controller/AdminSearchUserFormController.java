@@ -13,14 +13,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.QueryBO;
+import lk.ijse.bo.custom.UserBO;
+import lk.ijse.bo.custom.impl.QueryBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
-import lk.ijse.bo.custom.impl.UsersBorrowingBooksBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.UserDTO;
 import lk.ijse.dto.UsersBorrowingBooksDTO;
 import lk.ijse.tm.UserHistoryTm;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class AdminSearchUserFormController {
@@ -49,8 +53,9 @@ public class AdminSearchUserFormController {
     @FXML
     private JFXComboBox<String> cmbUsers;
 
-    private UserBOImpl userBO = new UserBOImpl();
-    private UsersBorrowingBooksBOImpl usersBorrowingBooksBO = new UsersBorrowingBooksBOImpl();
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    private QueryBO queryBO = (QueryBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.QUERY);
+
 
     public void initialize(){
         loadAllUsers();
@@ -58,15 +63,22 @@ public class AdminSearchUserFormController {
 
     private void loadAllUsers() {
 
-        ObservableList<String> obList = FXCollections.observableArrayList();
+        try{
 
-        List<UserDTO> userDTOS = userBO.getAllUsers();
+            ObservableList<String> obList = FXCollections.observableArrayList();
 
-        for(UserDTO dto : userDTOS){
-            obList.add(dto.getUser_name());
+            List<UserDTO> userDTOS = userBO.getAllUsers();
+
+            for(UserDTO dto : userDTOS){
+                obList.add(dto.getUser_name());
+            }
+
+            cmbUsers.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        cmbUsers.setItems(obList);
     }
 
     @FXML
@@ -82,24 +94,30 @@ public class AdminSearchUserFormController {
 
         ObservableList<UserHistoryTm> obList = FXCollections.observableArrayList();
 
-        List<UsersBorrowingBooksDTO> usersHistory = usersBorrowingBooksBO.getUserHistory(userName);
+        try{
 
-        for(UsersBorrowingBooksDTO historyDto : usersHistory){
+            List<UsersBorrowingBooksDTO> usersHistory = queryBO.getUserHistory(userName);
 
-            BookDTO bookDTO = historyDto.getBookDTO();
-            String bookTitle = bookDTO.getBook_title();
+            for(UsersBorrowingBooksDTO historyDto : usersHistory){
 
-            boolean isReturn = historyDto.is_return();
+                BookDTO bookDTO = historyDto.getBookDTO();
+                String bookTitle = bookDTO.getBook_title();
 
-            if(isReturn == true){
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Returned"));
-            }else {
-                obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Not Returned"));
+                boolean isReturn = historyDto.is_return();
+
+                if(isReturn == true){
+                    obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Returned"));
+                }else {
+                    obList.add(new UserHistoryTm(bookTitle, historyDto.getBorrow_date(),historyDto.getDue_date(),historyDto.getReturn_date(), "Not Returned"));
+                }
+
             }
 
-        }
+            tblUserBookDetails.setItems(obList);
 
-        tblUserBookDetails.setItems(obList);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

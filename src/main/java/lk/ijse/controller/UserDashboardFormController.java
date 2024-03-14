@@ -8,9 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UsersBorrowingBooksBO;
 import lk.ijse.bo.custom.impl.UsersBorrowingBooksBOImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class UserDashboardFormController {
 
@@ -26,7 +29,7 @@ public class UserDashboardFormController {
     @FXML
     private Label lblNoOfHaveToReturnBooks;
 
-    private UsersBorrowingBooksBOImpl usersBorrowingBooksBO = new UsersBorrowingBooksBOImpl();
+    private UsersBorrowingBooksBO usersBorrowingBooksBO = (UsersBorrowingBooksBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USERS_BORROWING_BOOKS);
 
     public void initialize(){
         setLblNoOfBorrowedBooks();
@@ -35,18 +38,36 @@ public class UserDashboardFormController {
     }
 
     private void setLblNoOfBorrowedBooks() {
-        int noOfBorrowedBooks = usersBorrowingBooksBO.setCurrentNumberOfAllBorrowedBooks(LoginFormController.email);
-        lblNoOfBorrowedBooks.setText(String.valueOf(noOfBorrowedBooks));
+        try{
+
+            int noOfBorrowedBooks = usersBorrowingBooksBO.setCurrentNumberOfAllBorrowedBooks(LoginFormController.email);
+            lblNoOfBorrowedBooks.setText(String.valueOf(noOfBorrowedBooks));
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setLblNoOfReturnedBooks() {
-        int noOfReturnedBooks = usersBorrowingBooksBO.setCurrentNumberOfReturnedBooks(LoginFormController.email);
-        lblNoOfReturnedBooks.setText(String.valueOf(noOfReturnedBooks));
+        try{
+
+            int noOfReturnedBooks = usersBorrowingBooksBO.setCurrentNumberOfReturnedBooks(LoginFormController.email);
+            lblNoOfReturnedBooks.setText(String.valueOf(noOfReturnedBooks));
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setLblNoOfHaveToReturnBooks() {
-        int noOfHaveToReturnBooks = usersBorrowingBooksBO.setCurrentNumberOfHaveToReturnBooks(LoginFormController.email);
-        lblNoOfHaveToReturnBooks.setText(String.valueOf(noOfHaveToReturnBooks));
+        try{
+
+            int noOfHaveToReturnBooks = usersBorrowingBooksBO.setCurrentNumberOfHaveToReturnBooks(LoginFormController.email);
+            lblNoOfHaveToReturnBooks.setText(String.valueOf(noOfHaveToReturnBooks));
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

@@ -1,14 +1,15 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.dao.custom.TransactionDAO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.util.List;
 
-public class TransactionDAOImpl {
+public class TransactionDAOImpl implements TransactionDAO {
 
+    @Override
     public String generateNextId() {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -25,7 +26,8 @@ public class TransactionDAOImpl {
         return splitId(id);
     }
 
-    private String splitId(String currentTransactionId) {
+    @Override
+    public String splitId(String currentTransactionId) {
 
         if(currentTransactionId != null) {
             String[] split = currentTransactionId.split("00");

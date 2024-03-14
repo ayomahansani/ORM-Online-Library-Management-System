@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BranchBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.BranchBOImpl;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.tm.BranchTm;
@@ -57,7 +60,7 @@ public class BranchManageFormController {
     @FXML
     private Button btnClear;
 
-    private BranchBOImpl branchBO = new BranchBOImpl();
+    private BranchBO branchBO = (BranchBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BRANCH);
 
 
     public void initialize(){
@@ -68,8 +71,14 @@ public class BranchManageFormController {
     }
 
     private void generateNextBranchId() {
-        String branchId = branchBO.generateNextBranchId();    // Using loose coupling
-        txtBranchId.setText(branchId);
+        try{
+
+            String branchId = branchBO.generateNextBranchId();    // Using loose coupling
+            txtBranchId.setText(branchId);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void tableListener() {
@@ -96,13 +105,19 @@ public class BranchManageFormController {
 
         ObservableList<BranchTm> obList = FXCollections.observableArrayList();
 
-        List<BranchDTO> allBranches = branchBO.getAllBranches();
+        try{
 
-        for(BranchDTO dto : allBranches){
-            obList.add(new BranchTm(dto.getBranch_id(), dto.getBranch_address(), dto.getBranch_telephone()));
+            List<BranchDTO> allBranches = branchBO.getAllBranches();
+
+            for(BranchDTO dto : allBranches){
+                obList.add(new BranchTm(dto.getBranch_id(), dto.getBranch_address(), dto.getBranch_telephone()));
+            }
+
+            tblBranches.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblBranches.setItems(obList);
     }
 
 
@@ -115,14 +130,20 @@ public class BranchManageFormController {
 
         if(!branchId.isEmpty() && !branchLocation.isEmpty() && !branchTel.isEmpty()){
 
-            BranchDTO branchDTO = new BranchDTO(branchId,branchLocation,branchTel);
+            try{
 
-            boolean isBranchSaved = branchBO.saveBranch(branchDTO);
+                BranchDTO branchDTO = new BranchDTO(branchId,branchLocation,branchTel);
 
-            if(isBranchSaved){
-                new Alert(Alert.AlertType.CONFIRMATION, "new branch added!").show();
-                clearFields();
-                initialize();
+                boolean isBranchSaved = branchBO.saveBranch(branchDTO);
+
+                if(isBranchSaved){
+                    new Alert(Alert.AlertType.CONFIRMATION, "new branch added!").show();
+                    clearFields();
+                    initialize();
+                }
+
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         }else {
@@ -139,14 +160,20 @@ public class BranchManageFormController {
 
         if(!branchId.isEmpty() && !branchLocation.isEmpty() && !branchTel.isEmpty()){
 
-            BranchDTO branchDTO = new BranchDTO(branchId,branchLocation,branchTel);
+            try{
 
-            boolean isBranchUpdated = branchBO.updateBranch(branchDTO);
+                BranchDTO branchDTO = new BranchDTO(branchId,branchLocation,branchTel);
 
-            if(isBranchUpdated){
-                new Alert(Alert.AlertType.CONFIRMATION, "branch updated!").show();
-                clearFields();
-                initialize();
+                boolean isBranchUpdated = branchBO.updateBranch(branchDTO);
+
+                if(isBranchUpdated){
+                    new Alert(Alert.AlertType.CONFIRMATION, "branch updated!").show();
+                    clearFields();
+                    initialize();
+                }
+
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         }else {
@@ -167,13 +194,19 @@ public class BranchManageFormController {
 
                 if ((Pattern.matches("(Br)[0-9]{3,}", txtBranchId.getText()))) {
 
-                    String id = txtBranchId.getText();
+                    try{
+                        String id = txtBranchId.getText();
 
-                    boolean isBranchDeleted = branchBO.deleteBranch(id);   // Using loose coupling
-                    if (isBranchDeleted) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "branch deleted!").show();
-                        clearFields();
-                        initialize();
+                        boolean isBranchDeleted = branchBO.deleteBranch(id);   // Using loose coupling
+
+                        if (isBranchDeleted) {
+                            new Alert(Alert.AlertType.CONFIRMATION, "branch deleted!").show();
+                            clearFields();
+                            initialize();
+                        }
+
+                    }catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }else {
                     new Alert(Alert.AlertType.ERROR, "Invalid Id!").show();
@@ -199,6 +232,8 @@ public class BranchManageFormController {
 
         //if ((Pattern.matches("[Br][0-9]{3,}", txtBranchId.getText()))) {
 
+        try{
+
             String branchAddress = txtBranchSearch.getText();
 
             BranchDTO branchDTO = branchBO.searchBranch(branchAddress);
@@ -210,6 +245,11 @@ public class BranchManageFormController {
             }else {
                 new Alert(Alert.AlertType.INFORMATION, "branch not found").show();
             }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         /*}else {
             new Alert(Alert.AlertType.ERROR, "Invalid Address").show();
         }*/

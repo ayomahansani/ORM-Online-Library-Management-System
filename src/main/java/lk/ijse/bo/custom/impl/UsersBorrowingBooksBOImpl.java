@@ -1,5 +1,8 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.UsersBorrowingBooksBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.UsersBorrowingBooksDAO;
 import lk.ijse.dao.custom.impl.UsersBorrowingBooksDAOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BranchDTO;
@@ -9,60 +12,28 @@ import lk.ijse.entity.Book;
 import lk.ijse.entity.Branch;
 import lk.ijse.entity.User;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UsersBorrowingBooksBOImpl {
+public class UsersBorrowingBooksBOImpl implements UsersBorrowingBooksBO {
 
-    private UsersBorrowingBooksDAOImpl usersBorrowingBooksDAO = new UsersBorrowingBooksDAOImpl();
+    private UsersBorrowingBooksDAO usersBorrowingBooksDAO = (UsersBorrowingBooksDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USERS_BORROWING_BOOKS);
 
-    public List<UsersBorrowingBooksDTO> getUserHistory(String userName) {
-
-        List<Object[]> objectsList =  usersBorrowingBooksDAO.getUserHistory(userName);
-
-        List<UsersBorrowingBooksDTO> usersBorrowingBooksDTOS = new ArrayList<>();
-
-        for(Object[] objects : objectsList) {
-
-            User user = (User) objects[5];
-            Branch branch = user.getBranch();
-            BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
-            UserDTO userDTO = new UserDTO(user.getUserEmail(), user.getUserName(), user.getUserPassword(), branchDTO);
-
-            Book book = (Book) objects[6];
-            Branch branch1 = book.getBranch();
-            BranchDTO branchDTO1 = new BranchDTO(branch1.getBranchId(), branch1.getBranchAddress(), branch1.getBranchTelephone());
-            BookDTO bookDTO = new BookDTO(book.getBookId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailabilityStatus(), branchDTO1);
-
-            usersBorrowingBooksDTOS.add(
-                    new UsersBorrowingBooksDTO(
-                            (String) objects[0],
-                            (LocalDate) objects[1],
-                            (LocalDate) objects[2],
-                            (LocalDate) objects[3],
-                            (Boolean) objects[4],
-                            userDTO,
-                            bookDTO
-                    )
-            );
-
-        }
-
-        return usersBorrowingBooksDTOS;
-
-    }
-
-    public int setCurrentNumberOfAllBorrowedBooks(String email) {
+    @Override
+    public int setCurrentNumberOfAllBorrowedBooks(String email) throws SQLException {
         return usersBorrowingBooksDAO.setCurrentNumber(email);
     }
 
-    public int setCurrentNumberOfReturnedBooks(String email) {
+    @Override
+    public int setCurrentNumberOfReturnedBooks(String email) throws SQLException {
         return usersBorrowingBooksDAO.setReturnedCurrentNumber(email);
     }
 
-    public int setCurrentNumberOfHaveToReturnBooks(String email) {
+    @Override
+    public int setCurrentNumberOfHaveToReturnBooks(String email) throws SQLException {
         return usersBorrowingBooksDAO.setPendingCurrentNumber(email);
     }
 }

@@ -12,14 +12,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.UserBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BranchDTO;
-import lk.ijse.entity.Book;
 import lk.ijse.tm.BookTm;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserBorrowingBooksFormController {
@@ -54,8 +57,8 @@ public class UserBorrowingBooksFormController {
     @FXML
     private TableColumn<?, ?> colAvailabilityStatus;
 
-    private BookBOImpl bookBO = new BookBOImpl();
-    private UserBOImpl userBO = new UserBOImpl();
+    private BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
+    private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     static BookDTO bookDTO;
 
@@ -82,22 +85,28 @@ public class UserBorrowingBooksFormController {
 
         ObservableList<BookTm> obList = FXCollections.observableArrayList();
 
-        String branchId = userBO.getUserBranch(LoginFormController.email);
+        try{
 
-        List<BookDTO> allBooks = bookBO.getBooksSpecificByBranch(branchId);
+            String branchId = userBO.getUserBranch(LoginFormController.email);
 
-        for(BookDTO dto : allBooks){
-            BranchDTO branchDTO = dto.getBranchDTO();
-            boolean availabilityStatus = dto.isAvailability_status();
+            List<BookDTO> allBooks = bookBO.getBooksSpecificByBranch(branchId);
 
-            if(availabilityStatus == true){
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
-            }else{
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+            for(BookDTO dto : allBooks){
+                BranchDTO branchDTO = dto.getBranchDTO();
+                boolean availabilityStatus = dto.isAvailability_status();
+
+                if(availabilityStatus == true){
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
+                }else{
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+                }
             }
-        }
 
-        tblBooks.setItems(obList);
+            tblBooks.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setCellValueFactory() {
@@ -111,72 +120,89 @@ public class UserBorrowingBooksFormController {
 
         ObservableList<String> obList = FXCollections.observableArrayList();
 
-        String branchId = userBO.getUserBranch(LoginFormController.email);
+        try{
 
-        List<String> bookGenres = bookBO.getBookGenresSpecificByBranch(branchId);
+            String branchId = userBO.getUserBranch(LoginFormController.email);
 
-        obList.addAll(bookGenres);
+            List<String> bookGenres = bookBO.getBookGenresSpecificByBranch(branchId);
 
-        cmbSelectBookGenre.setItems(obList);
+            obList.addAll(bookGenres);
+
+            cmbSelectBookGenre.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
 
-        String bookTitle = txtSearchBar.getText();
+        try{
 
-        String branchId = userBO.getUserBranch(LoginFormController.email);
+            String bookTitle = txtSearchBar.getText();
 
-        bookDTO = bookBO.isBookAvailable(bookTitle,branchId);
+            String branchId = userBO.getUserBranch(LoginFormController.email);
 
-        try {
+            bookDTO = bookBO.isBookAvailable(bookTitle,branchId);
 
-            if(bookDTO != null){
+            try {
 
-                Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/book_view_form.fxml"));
-                Scene scene = new Scene(anchorPane);
+                if(bookDTO != null){
 
-                Stage stage = new Stage();
-                stage.setTitle("Book");
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.show();
+                    Parent anchorPane = FXMLLoader.load(getClass().getResource("/view/book_view_form.fxml"));
+                    Scene scene = new Scene(anchorPane);
 
-            }else {
-                new Alert(Alert.AlertType.INFORMATION, "This Book is not available in this branch").show();
+                    Stage stage = new Stage();
+                    stage.setTitle("Book");
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.show();
+
+                }else {
+                    new Alert(Alert.AlertType.INFORMATION, "This Book is not available in this branch").show();
+                }
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
     void cmbSelectBookGenreOnActions(ActionEvent event) {
 
-        String bookGenre = cmbSelectBookGenre.getValue();
+        try{
 
-        String branchId = userBO.getUserBranch(LoginFormController.email);
+            String bookGenre = cmbSelectBookGenre.getValue();
 
-        List<BookDTO> allBooks = bookBO.getBooksSpecificByGenre(bookGenre,branchId);
+            String branchId = userBO.getUserBranch(LoginFormController.email);
 
-        ObservableList<BookTm> obList = FXCollections.observableArrayList();
+            List<BookDTO> allBooks = bookBO.getBooksSpecificByGenre(bookGenre,branchId);
 
-        for(BookDTO dto : allBooks){
-            BranchDTO branchDTO = dto.getBranchDTO();
-            boolean availabilityStatus = dto.isAvailability_status();
+            ObservableList<BookTm> obList = FXCollections.observableArrayList();
 
-            if(availabilityStatus == true){
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
-            }else{
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+            for(BookDTO dto : allBooks){
+                BranchDTO branchDTO = dto.getBranchDTO();
+                boolean availabilityStatus = dto.isAvailability_status();
+
+                if(availabilityStatus == true){
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
+                }else{
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+                }
             }
+
+            tblBooks.setItems(obList);
+
+            setCellValueFactory();
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblBooks.setItems(obList);
-
-        setCellValueFactory();
-
     }
 
     @FXML

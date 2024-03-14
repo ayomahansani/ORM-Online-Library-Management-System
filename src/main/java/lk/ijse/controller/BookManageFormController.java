@@ -8,12 +8,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.bo.custom.BranchBO;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.BranchBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BranchDTO;
 import lk.ijse.tm.BookTm;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -78,8 +82,8 @@ public class BookManageFormController {
     private TextField txtAuthor;
 
 
-    private BookBOImpl bookBO = new BookBOImpl();
-    private BranchBOImpl branchBO = new BranchBOImpl();
+    private BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BOOK);
+    private BranchBO branchBO = (BranchBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.BRANCH);
 
 
     public void initialize(){
@@ -92,8 +96,15 @@ public class BookManageFormController {
     }
 
     private void generateNextBookId() {
-        String bookId = bookBO.generateNextBookId();    // Using loose coupling
-        txtBookId.setText(bookId);
+        try{
+
+            String bookId = bookBO.generateNextBookId();    // Using loose coupling
+            txtBookId.setText(bookId);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void tableListener() {
@@ -126,33 +137,44 @@ public class BookManageFormController {
 
         ObservableList<BookTm> obList = FXCollections.observableArrayList();
 
-        List<BookDTO> allBooks = bookBO.getAllBooks();
+        try{
+            List<BookDTO> allBooks = bookBO.getAllBooks();
 
-        for(BookDTO dto : allBooks){
-            BranchDTO branchDTO = dto.getBranchDTO();
-            boolean availabilityStatus = dto.isAvailability_status();
+            for(BookDTO dto : allBooks){
+                BranchDTO branchDTO = dto.getBranchDTO();
+                boolean availabilityStatus = dto.isAvailability_status();
 
-            if(availabilityStatus == true){
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
-            }else{
-                obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+                if(availabilityStatus == true){
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Available"));
+                }else{
+                    obList.add(new BookTm(dto.getBook_id(), dto.getBook_title(), dto.getBook_author(), dto.getBook_genre(), branchDTO.getBranch_address(), "Not Available"));
+                }
             }
-        }
 
-        tblBooks.setItems(obList);
+            tblBooks.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadBranchAddress() {
 
         ObservableList<String> obList = FXCollections.observableArrayList();
 
-        List<BranchDTO> branchDTOS = branchBO.getAllBranches();
+        try{
 
-        for(BranchDTO dto : branchDTOS){
-            obList.add(dto.getBranch_address());
+            List<BranchDTO> branchDTOS = branchBO.getAllBranches();
+
+            for(BranchDTO dto : branchDTOS){
+                obList.add(dto.getBranch_address());
+            }
+
+            cmbBranchAddress.setItems(obList);
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        cmbBranchAddress.setItems(obList);
     }
 
     private void setValuesToAvailabilityComboBox() {
@@ -175,34 +197,40 @@ public class BookManageFormController {
         String branchAddress = cmbBranchAddress.getValue();
         String availabilityStatus = cmbAvailabilityStatus.getValue();
 
-        if(!bookId.isEmpty() && !title.isEmpty() && !author.isEmpty() && !genre.isEmpty() && !branchAddress.isEmpty() && !availabilityStatus.isEmpty()){
+        try{
 
-            BranchDTO branchDTO = branchBO.getBranchByAddress(branchAddress);
+            if(!bookId.isEmpty() && !title.isEmpty() && !author.isEmpty() && !genre.isEmpty() && !branchAddress.isEmpty() && !availabilityStatus.isEmpty()){
 
-            if(availabilityStatus.equals("Available")){
-                BookDTO bookDTO = new BookDTO(bookId,title,author,genre,true,branchDTO);
+                BranchDTO branchDTO = branchBO.getBranchByAddress(branchAddress);
 
-                boolean isBookSaved = bookBO.saveBook(bookDTO);
+                if(availabilityStatus.equals("Available")){
+                    BookDTO bookDTO = new BookDTO(bookId,title,author,genre,true,branchDTO);
 
-                if(isBookSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION, "new book added!").show();
-                    clearFields();
-                    initialize();
+                    boolean isBookSaved = bookBO.saveBook(bookDTO);
+
+                    if(isBookSaved){
+                        new Alert(Alert.AlertType.CONFIRMATION, "new book added!").show();
+                        clearFields();
+                        initialize();
+                    }
+                }else {
+                    BookDTO bookDTO = new BookDTO(bookId,title,author,genre,false,branchDTO);
+
+                    boolean isBookSaved = bookBO.saveBook(bookDTO);
+
+                    if(isBookSaved){
+                        new Alert(Alert.AlertType.CONFIRMATION, "new book added!").show();
+                        clearFields();
+                        initialize();
+                    }
                 }
+
             }else {
-                BookDTO bookDTO = new BookDTO(bookId,title,author,genre,false,branchDTO);
-
-                boolean isBookSaved = bookBO.saveBook(bookDTO);
-
-                if(isBookSaved){
-                    new Alert(Alert.AlertType.CONFIRMATION, "new book added!").show();
-                    clearFields();
-                    initialize();
-                }
+                new Alert(Alert.AlertType.ERROR, "Please fill all fields!").show();
             }
 
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Please fill all fields!").show();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -226,34 +254,40 @@ public class BookManageFormController {
         String branchAddress = cmbBranchAddress.getValue();
         String availabilityStatus = cmbAvailabilityStatus.getValue();
 
-        if(!bookId.isEmpty() && !title.isEmpty() && !author.isEmpty() && !genre.isEmpty() && !branchAddress.isEmpty() && !availabilityStatus.isEmpty()){
+        try{
 
-            BranchDTO branchDTO = branchBO.getBranchByAddress(branchAddress);
+            if(!bookId.isEmpty() && !title.isEmpty() && !author.isEmpty() && !genre.isEmpty() && !branchAddress.isEmpty() && !availabilityStatus.isEmpty()){
 
-            if(availabilityStatus.equals("Available")){
-                BookDTO bookDTO = new BookDTO(bookId,title,author,genre,true,branchDTO);
+                BranchDTO branchDTO = branchBO.getBranchByAddress(branchAddress);
 
-                boolean isBookUpdated = bookBO.updateBook(bookDTO);
+                if(availabilityStatus.equals("Available")){
+                    BookDTO bookDTO = new BookDTO(bookId,title,author,genre,true,branchDTO);
 
-                if(isBookUpdated){
-                    new Alert(Alert.AlertType.CONFIRMATION, "book updated!").show();
-                    clearFields();
-                    initialize();
+                    boolean isBookUpdated = bookBO.updateBook(bookDTO);
+
+                    if(isBookUpdated){
+                        new Alert(Alert.AlertType.CONFIRMATION, "book updated!").show();
+                        clearFields();
+                        initialize();
+                    }
+                }else {
+                    BookDTO bookDTO = new BookDTO(bookId,title,author,genre,false,branchDTO);
+
+                    boolean isBookUpdated = bookBO.updateBook(bookDTO);
+
+                    if(isBookUpdated){
+                        new Alert(Alert.AlertType.CONFIRMATION, "book updated!").show();
+                        clearFields();
+                        initialize();
+                    }
                 }
+
             }else {
-                BookDTO bookDTO = new BookDTO(bookId,title,author,genre,false,branchDTO);
-
-                boolean isBookUpdated = bookBO.updateBook(bookDTO);
-
-                if(isBookUpdated){
-                    new Alert(Alert.AlertType.CONFIRMATION, "book updated!").show();
-                    clearFields();
-                    initialize();
-                }
+                new Alert(Alert.AlertType.ERROR, "Please fill all fields!").show();
             }
 
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Please fill all fields!").show();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -270,15 +304,22 @@ public class BookManageFormController {
 
                 if ((Pattern.matches("[B][0-9]{3,}", txtBookId.getText()))) {
 
-                    String id = txtBookId.getText();
+                    try{
 
-                    boolean isBookDeleted = bookBO.deleteBook(id);   // Using loose coupling
+                        String id = txtBookId.getText();
 
-                    if (isBookDeleted) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "book deleted!").show();
-                        clearFields();
-                        initialize();
+                        boolean isBookDeleted = bookBO.deleteBook(id);   // Using loose coupling
+
+                        if (isBookDeleted) {
+                            new Alert(Alert.AlertType.CONFIRMATION, "book deleted!").show();
+                            clearFields();
+                            initialize();
+                        }
+
+                    }catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
+
                 }else {
                     new Alert(Alert.AlertType.ERROR, "Invalid Id!").show();
                 }
@@ -295,6 +336,8 @@ public class BookManageFormController {
     void txtBookSearchOnAction(ActionEvent event) {
 
         //if ((Pattern.matches("[B][0-9]{3,}", txtBookId.getText()))) {
+
+        try{
 
             String bookTitle = txtBookSearch.getText();
 
@@ -318,6 +361,10 @@ public class BookManageFormController {
             }else {
                 new Alert(Alert.AlertType.INFORMATION, "Book not found").show();
             }
+
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
         /*}else {
             new Alert(Alert.AlertType.ERROR, "Invalid Book Title").show();
         }*/

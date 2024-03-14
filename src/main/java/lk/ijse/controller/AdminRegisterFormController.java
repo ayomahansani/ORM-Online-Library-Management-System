@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.AdminBO;
 import lk.ijse.bo.custom.impl.AdminBOImpl;
 import lk.ijse.dto.AdminDTO;
 
@@ -35,7 +37,7 @@ public class AdminRegisterFormController {
     @FXML
     private Button btnLoginHere;
 
-    private AdminBOImpl adminBO = new AdminBOImpl();
+    private AdminBO adminBO = (AdminBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADMIN);
 
 
     @FXML
