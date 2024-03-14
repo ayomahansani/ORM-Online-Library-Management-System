@@ -18,6 +18,7 @@ import lk.ijse.bo.custom.AdminBO;
 import lk.ijse.bo.custom.UserBO;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class LoginFormController {
 
@@ -47,6 +48,28 @@ public class LoginFormController {
 
     public static String email;
     public static String password;
+
+
+    private boolean validateSignIn() {
+
+        //validate email
+        String email = txtUsername.getText();
+        boolean matchesEmail = Pattern.matches("[a-zA-Z0-9!@#$%^&*()_+=;':\",./<>?|]{10,}", email);
+        if(!matchesEmail){
+            new Alert(Alert.AlertType.ERROR, "Invalid Email").show();
+            return false;
+        }
+
+        //validate password
+        String password = txtPassword.getText();
+        boolean matchesPassword = Pattern.matches("[a-zA-Z0-9!@#$%^&*()_+=;':\",./<>?|]{8,}", password);
+        if(!matchesPassword){
+            new Alert(Alert.AlertType.ERROR, "Invalid Password").show();
+            return false;
+        }
+
+        return true;
+    }
 
 
     public void initialize(){
@@ -83,60 +106,66 @@ public class LoginFormController {
             primaryStage.setTitle("Admin Main Form");
         }*/
 
+        boolean isValidated = validateSignIn();
 
-        String adminOruser = cmbAdminOrUser.getValue();
-        email = txtUsername.getText();
-        password = txtPassword.getText();
+        if(isValidated){
 
-        if(!adminOruser.isEmpty() && !email.isEmpty() && !password.isEmpty()){
+            String adminOrUser = cmbAdminOrUser.getValue();
+            email = txtUsername.getText();
+            password = txtPassword.getText();
 
-            try{
+            if(!adminOrUser.isEmpty() && !email.isEmpty() && !password.isEmpty()){
 
-                if(adminOruser.equals("Admin")){
-                    boolean isMatched = adminBO.checkAdminCredential(email, password);
+                try{
 
-                    if(isMatched){
-                        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_main_form.fxml"));
-                        Scene scene = new Scene(rootNode);
-                        loginPage.getChildren().clear();
-                        Stage primaryStage = (Stage) loginPage.getScene().getWindow();
-                        primaryStage.setScene(scene);
-                        primaryStage.centerOnScreen();
-                        primaryStage.setTitle("Admin Main Form");
+                    if(adminOrUser.equals("Admin")){
+                        boolean isMatched = adminBO.checkAdminCredential(email, password);
 
-                        new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();
+                        if(isMatched){
+                            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_main_form.fxml"));
+                            Scene scene = new Scene(rootNode);
+                            loginPage.getChildren().clear();
+                            Stage primaryStage = (Stage) loginPage.getScene().getWindow();
+                            primaryStage.setScene(scene);
+                            primaryStage.centerOnScreen();
+                            primaryStage.setTitle("Admin Main Form");
 
-                    }else {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Incorrect Username or Password!").show();
-                    }
+                            new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();
 
-                }else {
-                    boolean isMatched = userBO.checkUserCredential(email, password);
-
-                    if(isMatched){
-                        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_main_form.fxml"));
-                        Scene scene = new Scene(rootNode);
-                        loginPage.getChildren().clear();
-                        Stage primaryStage = (Stage) loginPage.getScene().getWindow();
-                        primaryStage.setScene(scene);
-                        primaryStage.centerOnScreen();
-                        primaryStage.setTitle("User Main Form");
-
-                        new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();
-
+                        }else {
+                            new Alert(Alert.AlertType.CONFIRMATION, "Incorrect Username or Password!").show();
+                        }
 
                     }else {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Incorrect Username or Password!").show();
-                    }
+                        boolean isMatched = userBO.checkUserCredential(email, password);
 
+                        if(isMatched){
+                            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_main_form.fxml"));
+                            Scene scene = new Scene(rootNode);
+                            loginPage.getChildren().clear();
+                            Stage primaryStage = (Stage) loginPage.getScene().getWindow();
+                            primaryStage.setScene(scene);
+                            primaryStage.centerOnScreen();
+                            primaryStage.setTitle("User Main Form");
+
+                            new Alert(Alert.AlertType.CONFIRMATION, "Login Success!").show();
+
+
+                        }else {
+                            new Alert(Alert.AlertType.CONFIRMATION, "Incorrect Username or Password!").show();
+                        }
+
+                    }
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
                 }
-            }catch (Exception e){
-                System.out.println(e.getMessage());
+
+            }else {
+                new Alert(Alert.AlertType.INFORMATION, "Please fill all fields!").show();
             }
 
-        }else {
-            new Alert(Alert.AlertType.INFORMATION, "Please fill all fields!").show();
         }
+
     }
 
     @FXML

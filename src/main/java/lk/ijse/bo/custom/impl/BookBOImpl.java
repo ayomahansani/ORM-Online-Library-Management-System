@@ -49,10 +49,15 @@ public class BookBOImpl implements BookBO {
     @Override
     public BookDTO searchBook(String bookTitle) throws SQLException {
         Book book = bookDAO.search(bookTitle);
-        Branch branch = book.getBranch();
-        BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
 
-        return new BookDTO(book.getBookId(), book.getTitle(), book.getAuthor(), book.getGenre(),book.isAvailabilityStatus(),branchDTO);
+        if(book != null){
+            Branch branch = book.getBranch();
+            BranchDTO branchDTO = new BranchDTO(branch.getBranchId(), branch.getBranchAddress(), branch.getBranchTelephone());
+
+            return new BookDTO(book.getBookId(), book.getTitle(), book.getAuthor(), book.getGenre(),book.isAvailabilityStatus(),branchDTO);
+        }
+
+        return null;
     }
 
     @Override

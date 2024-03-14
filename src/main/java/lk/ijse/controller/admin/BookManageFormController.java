@@ -108,7 +108,7 @@ public class BookManageFormController {
         String authorName = txtAuthor.getText();
         boolean matchesAuthorName = Pattern.matches("[A-Za-z\\s]{2,}[^!@%* .]", authorName);
         if(!matchesAuthorName){
-            new Alert(Alert.AlertType.ERROR, "Invalid Name").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid Author Name").show();
             return false;
         }
 
@@ -395,9 +395,10 @@ public class BookManageFormController {
 
                 BookDTO bookDTO = bookBO.searchBook(bookTitle);
 
-                BranchDTO branchDTO = bookDTO.getBranchDTO();
-
                 if(bookDTO != null){
+
+                    BranchDTO branchDTO = bookDTO.getBranchDTO();
+
                     txtBookId.setText(bookDTO.getBook_id());
                     txtTitle.setText(bookDTO.getBook_title());
                     txtAuthor.setText(bookDTO.getBook_author());
