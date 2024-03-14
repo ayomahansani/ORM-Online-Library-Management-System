@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RegisterFormController {
+public class ForgotPasswordFormController {
 
     @FXML
-    private AnchorPane signUpForm;
+    private AnchorPane resetPasswordPage;
 
     @FXML
     private Button btnUser;
@@ -24,24 +24,23 @@ public class RegisterFormController {
 
     @FXML
     void btnAdminOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_register_form.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_forgot_password_form.fxml"));
         Scene scene = new Scene(rootNode);
-        signUpForm.getChildren().clear();
-        Stage primaryStage = (Stage) signUpForm.getScene().getWindow();
+        resetPasswordPage.getChildren().clear();
+        Stage primaryStage = (Stage) resetPasswordPage.getScene().getWindow();
         primaryStage.setScene(scene);
-        primaryStage.centerOnScreen();
-        primaryStage.setTitle("Admin Register Form");
+        primaryStage.setTitle("Admin Reset Password Form");
     }
 
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_register_form.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_forgot_password_form.fxml"));
         Scene scene = new Scene(rootNode);
-        signUpForm.getChildren().clear();
-        Stage primaryStage = (Stage) signUpForm.getScene().getWindow();
+        resetPasswordPage.getChildren().clear();
+        Stage primaryStage = (Stage) resetPasswordPage.getScene().getWindow();
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
-        primaryStage.setTitle("User Register Form");
+        primaryStage.setTitle("User Reset Password Form");
     }
 
 }

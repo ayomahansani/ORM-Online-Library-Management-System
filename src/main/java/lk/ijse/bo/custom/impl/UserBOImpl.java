@@ -79,4 +79,14 @@ public class UserBOImpl implements UserBO {
 
         return new UserDTO(user.getUserEmail(),user.getUserName(),user.getUserPassword(),branchDTO);
     }
+
+    @Override
+    public boolean checkUserName(String email) throws SQLException {
+        return userDAO.checkUserName(email);
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) throws SQLException{
+        return userDAO.updatePassword(email,newPassword);
+    }
 }

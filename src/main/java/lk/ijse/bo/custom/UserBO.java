@@ -17,4 +17,6 @@ public interface UserBO extends SuperBO {
     boolean deleteAccount(String email) throws SQLException;
     String getUserBranch(String email) throws SQLException;
     UserDTO getUser(String email) throws SQLException;
+    boolean checkUserName(String email) throws SQLException;
+    boolean updatePassword(String email, String newPassword) throws SQLException;
 }

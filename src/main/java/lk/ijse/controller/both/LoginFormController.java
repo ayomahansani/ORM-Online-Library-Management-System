@@ -179,8 +179,13 @@ public class LoginFormController {
     }
 
     @FXML
-    void btnForgotPasswordOnAction(ActionEvent event) {
-
+    void btnForgotPasswordOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/both/forgot_password_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        loginPage.getChildren().clear();
+        Stage primaryStage = (Stage) loginPage.getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Reset Password Form");
     }
 
     @FXML

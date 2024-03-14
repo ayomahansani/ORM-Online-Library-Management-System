@@ -179,6 +179,52 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean checkUserName(String email) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM User";
+        Query query = session.createQuery(hql);
+
+        List<User> userList = query.list();
+
+        for(User user : userList){
+            String userEmail = user.getUserEmail();
+
+            if(email.equals(userEmail)){
+                return true;
+            }
+        }
+
+        transaction.commit();
+        session.close();
+
+        return false;
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "UPDATE User SET userPassword=:pw WHERE userEmail=:email";
+        Query query = session.createQuery(hql);
+        query.setParameter("email", email);
+        query.setParameter("pw", newPassword);
+
+        int affectedRows = query.executeUpdate();
+
+        boolean updated = affectedRows > 0;
+
+        transaction.commit();
+        session.close();
+
+        return updated;
+    }
+
+    @Override
     public boolean update(User entity) throws SQLException {
         return false;
     }

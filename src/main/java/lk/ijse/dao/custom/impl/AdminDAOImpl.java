@@ -3,6 +3,7 @@ package lk.ijse.dao.custom.impl;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.AdminDAO;
 import lk.ijse.entity.Admin;
+import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -52,6 +53,52 @@ public class AdminDAOImpl implements AdminDAO {
         session.close();
 
         return true;
+    }
+
+    @Override
+    public boolean checkUserName(String email) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM Admin";
+        Query query = session.createQuery(hql);
+
+        List<Admin> userList = query.list();
+
+        for(Admin admin : userList){
+            String adminEmail = admin.getAdminEmail();
+
+            if(email.equals(adminEmail)){
+                return true;
+            }
+        }
+
+        transaction.commit();
+        session.close();
+
+        return false;
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) {
+
+        Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "UPDATE Admin SET adminPassword=:pw WHERE adminEmail=:email";
+        Query query = session.createQuery(hql);
+        query.setParameter("email", email);
+        query.setParameter("pw", newPassword);
+
+        int affectedRows = query.executeUpdate();
+
+        boolean updated = affectedRows > 0;
+
+        transaction.commit();
+        session.close();
+
+        return updated;
     }
 
     @Override

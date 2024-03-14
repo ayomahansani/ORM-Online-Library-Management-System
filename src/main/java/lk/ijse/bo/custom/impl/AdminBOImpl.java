@@ -23,4 +23,14 @@ public class AdminBOImpl implements AdminBO {
     public boolean checkAdminCredential(String email, String password) throws SQLException {
         return adminDAO.checkAdminCredential(email, password);
     }
+
+    @Override
+    public boolean checkUserName(String email) throws SQLException {
+        return adminDAO.checkUserName(email);
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) throws SQLException{
+        return adminDAO.updatePassword(email,newPassword);
+    }
 }

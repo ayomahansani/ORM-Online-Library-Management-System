@@ -9,4 +9,6 @@ public interface AdminBO extends SuperBO {
 
     boolean saveAdminSignUp(AdminDTO adminDTO) throws SQLException;
     boolean checkAdminCredential(String email, String password) throws SQLException;
+    boolean checkUserName(String email) throws SQLException;
+    boolean updatePassword(String email, String newPassword) throws SQLException;
 }

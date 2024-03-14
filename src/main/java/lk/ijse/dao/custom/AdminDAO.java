@@ -8,6 +8,8 @@ import java.sql.SQLException;
 public interface AdminDAO extends CrudDAO<Admin> {
 
     boolean checkAdminCredential(String email, String password) throws SQLException;
+    boolean checkUserName(String email) throws SQLException;
+    boolean updatePassword(String email, String newPassword) throws SQLException;
 
     //boolean save(Admin admin);
 }

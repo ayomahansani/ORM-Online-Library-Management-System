@@ -17,4 +17,6 @@ public interface UserDAO extends CrudDAO<User>{
     boolean updateUserDetails(String name, String newName, String newEmail, String newPw) throws SQLException;
     String getUserBranch(String email) throws SQLException;
     User getUser(String email) throws SQLException;
+    boolean checkUserName(String email) throws SQLException;
+    boolean updatePassword(String email, String newPassword) throws SQLException;
 }
