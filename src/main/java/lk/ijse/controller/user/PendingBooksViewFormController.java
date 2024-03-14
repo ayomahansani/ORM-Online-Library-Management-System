@@ -17,6 +17,7 @@ import lk.ijse.dto.UsersBorrowingBooksDTO;
 import lk.ijse.tm.MyHistoryTm;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,23 +92,47 @@ public class PendingBooksViewFormController {
             ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
             ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to return?", yes, no).showAndWait();
+            if(LocalDate.now().isBefore(dto.getDue_date())){
 
-            if (type.orElse(no) == yes) {
+                Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "You still have days to return.\nAre you sure to return?", yes, no).showAndWait();
 
-                try{
+                if (type.orElse(no) == yes) {
 
-                    boolean updateIsReturnAndAvailabilityStatus = transactionBO.updateIsReturn(dto);
+                    try{
 
-                    if(updateIsReturnAndAvailabilityStatus){
+                        boolean updateIsReturnAndAvailabilityStatus = transactionBO.updateIsReturn(dto);
 
-                        initialize();
+                        if(updateIsReturnAndAvailabilityStatus){
 
-                        new Alert(Alert.AlertType.INFORMATION, "Book Returned Successfully!").show();
+                            initialize();
+
+                            new Alert(Alert.AlertType.INFORMATION, "Book Returned Successfully!").show();
+                        }
+
+                    }catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
+                }
+            }else {
 
-                }catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Your due date has passed!\nAre you sure to return?", yes, no).showAndWait();
+
+                if (type.orElse(no) == yes) {
+
+                    try{
+
+                        boolean updateIsReturnAndAvailabilityStatus = transactionBO.updateIsReturn(dto);
+
+                        if(updateIsReturnAndAvailabilityStatus){
+
+                            initialize();
+
+                            new Alert(Alert.AlertType.INFORMATION, "Book Returned Successfully!").show();
+                        }
+
+                    }catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

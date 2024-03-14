@@ -12,7 +12,7 @@ public interface UserDAO extends CrudDAO<User>{
     List<User> getAll();
     int setCurrentNumber();*/
 
-    boolean checkUserCredential(String email, String password) throws SQLException;
+    boolean checkUserCredential(String email, String password, String password1) throws SQLException;
     String getName(String email) throws SQLException;
     boolean updateUserDetails(String name, String newName, String newEmail, String newPw) throws SQLException;
     String getUserBranch(String email) throws SQLException;

@@ -20,8 +20,8 @@ public class AdminBOImpl implements AdminBO {
     }
 
     @Override
-    public boolean checkAdminCredential(String email, String password) throws SQLException {
-        return adminDAO.checkAdminCredential(email, password);
+    public boolean checkAdminCredential(String email, String password, String password1) throws SQLException {
+        return adminDAO.checkAdminCredential(email, password, password1);
     }
 
     @Override

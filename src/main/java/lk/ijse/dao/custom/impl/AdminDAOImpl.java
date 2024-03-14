@@ -14,7 +14,7 @@ import java.util.List;
 public class AdminDAOImpl implements AdminDAO {
 
     @Override
-    public boolean checkAdminCredential(String email, String password) {
+    public boolean checkAdminCredential(String email, String password, String password1) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
@@ -28,8 +28,8 @@ public class AdminDAOImpl implements AdminDAO {
             String adminEmail = admin.getAdminEmail();
             String adminPassword = admin.getAdminPassword();
 
-            if(email.equals(adminEmail)){
-                if(password.equals(adminPassword)){
+            if(adminEmail.equals(email)){
+                if(adminPassword.equals(password) || adminPassword.equals(password1)){
                     return true;
                 }
             }

@@ -8,9 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.bo.BOFactory;
@@ -43,6 +41,12 @@ public class LoginFormController {
     @FXML
     private Button btnForgotPassword;
 
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private CheckBox checkBoxPw;
+
     private AdminBO adminBO = (AdminBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ADMIN);
     private UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
@@ -61,9 +65,13 @@ public class LoginFormController {
         }
 
         //validate password
-        String password = txtPassword.getText();
+        String password = passwordField.getText();
         boolean matchesPassword = Pattern.matches("[a-zA-Z0-9!@#$%^&*()_+=;':\",./<>?|]{8,}", password);
-        if(!matchesPassword){
+
+        String password1 = passwordField.getText();
+        boolean matchesPassword1 = Pattern.matches("[a-zA-Z0-9!@#$%^&*()_+=;':\",./<>?|]{8,}", password1);
+
+        if(!matchesPassword || !matchesPassword1){
             new Alert(Alert.AlertType.ERROR, "Invalid Password").show();
             return false;
         }
@@ -87,39 +95,42 @@ public class LoginFormController {
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {
 
-        /*String adminOruser = cmbAdminOrUser.getValue();
+        String adminOruser = cmbAdminOrUser.getValue();
 
         if(adminOruser.equals("Admin")){
-            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin_main_form.fxml"));
+            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_main_form.fxml"));
             Scene scene = new Scene(rootNode);
             loginPage.getChildren().clear();
             Stage primaryStage = (Stage) loginPage.getScene().getWindow();
             primaryStage.setScene(scene);
+            primaryStage.centerOnScreen();
             primaryStage.setTitle("Admin Main Form");
 
         }else{
-            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user_main_form.fxml"));
+            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_main_form.fxml"));
             Scene scene = new Scene(rootNode);
             loginPage.getChildren().clear();
             Stage primaryStage = (Stage) loginPage.getScene().getWindow();
             primaryStage.setScene(scene);
+            primaryStage.centerOnScreen();
             primaryStage.setTitle("Admin Main Form");
-        }*/
+        }
 
-        boolean isValidated = validateSignIn();
+        /*boolean isValidated = validateSignIn();
 
         if(isValidated){
 
             String adminOrUser = cmbAdminOrUser.getValue();
             email = txtUsername.getText();
-            password = txtPassword.getText();
+            password = passwordField.getText();
+            String password1 = txtPassword.getText();
 
-            if(!adminOrUser.isEmpty() && !email.isEmpty() && !password.isEmpty()){
+            if(!adminOrUser.isEmpty() && !email.isEmpty() && (!password.isEmpty() || !password1.isEmpty())){
 
                 try{
 
                     if(adminOrUser.equals("Admin")){
-                        boolean isMatched = adminBO.checkAdminCredential(email, password);
+                        boolean isMatched = adminBO.checkAdminCredential(email, password, password1);
 
                         if(isMatched){
                             Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_main_form.fxml"));
@@ -137,7 +148,7 @@ public class LoginFormController {
                         }
 
                     }else {
-                        boolean isMatched = userBO.checkUserCredential(email, password);
+                        boolean isMatched = userBO.checkUserCredential(email, password, password1);
 
                         if(isMatched){
                             Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/user/user_main_form.fxml"));
@@ -164,7 +175,7 @@ public class LoginFormController {
                 new Alert(Alert.AlertType.INFORMATION, "Please fill all fields!").show();
             }
 
-        }
+        }*/
 
     }
 
@@ -190,11 +201,32 @@ public class LoginFormController {
 
     @FXML
     void txtUsernameOnAction(ActionEvent event) {
-        txtPassword.requestFocus();
+        passwordField.requestFocus();
     }
 
     @FXML
     void txtPasswordOnAction(ActionEvent event) throws IOException {
+        btnLoginOnAction(event);
+    }
+
+    @FXML
+    void checkBoxPwOnAction(ActionEvent event) {
+
+        if (checkBoxPw.isSelected()){
+            txtPassword.setText(passwordField.getText());
+            txtPassword.setVisible(true);
+            passwordField.setVisible(false);
+        }
+        else{
+            passwordField.setText(txtPassword.getText());
+            passwordField.setVisible(true);
+            txtPassword.setVisible(false);
+        }
+
+    }
+
+    @FXML
+    void passwordFieldOnAction(ActionEvent event) throws IOException {
         btnLoginOnAction(event);
     }
 

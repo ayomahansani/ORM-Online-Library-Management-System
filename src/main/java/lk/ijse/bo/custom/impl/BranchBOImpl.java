@@ -59,7 +59,13 @@ public class BranchBOImpl implements BranchBO {
     public BranchDTO searchBranch(String branchAddress) throws SQLException {
 
         Branch branch = branchDAO.search(branchAddress);
-        return new BranchDTO(branch.getBranchId(),branch.getBranchAddress(), branch.getBranchTelephone());
+
+        if(branch != null){
+            return new BranchDTO(branch.getBranchId(),branch.getBranchAddress(), branch.getBranchTelephone());
+        }
+
+        return null;
+
     }
 
     @Override

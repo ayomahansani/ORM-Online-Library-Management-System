@@ -162,6 +162,7 @@ public class UserDetailsSettingFormController {
                         settingPage.getChildren().clear();
                         Stage primaryStage = (Stage) settingPage.getScene().getWindow();
                         primaryStage.setScene(scene);
+                        primaryStage.centerOnScreen();
                         primaryStage.setTitle("Register Form");
 
                         new Alert(Alert.AlertType.CONFIRMATION, "Your account is deleted!").show();

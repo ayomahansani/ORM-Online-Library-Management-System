@@ -10,7 +10,7 @@ public interface UserBO extends SuperBO {
 
     boolean saveUserSignUp(UserDTO userDTO) throws SQLException;
     int setCurrentNumberOfUsers() throws SQLException;
-    boolean checkUserCredential(String email, String password) throws SQLException;
+    boolean checkUserCredential(String email, String password, String password1) throws SQLException;
     String getName(String email) throws SQLException;
     boolean updateUserDetails(String name, String newName, String newEmail, String newPw) throws SQLException;
     List<UserDTO> getAllUsers() throws SQLException;

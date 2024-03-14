@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean checkUserCredential(String email, String password) {
+    public boolean checkUserCredential(String email, String password, String password1) {
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
@@ -41,8 +41,8 @@ public class UserDAOImpl implements UserDAO {
             String userEmail = user.getUserEmail();
             String userPassword = user.getUserPassword();
 
-            if(email.equals(userEmail)){
-                if(password.equals(userPassword)){
+            if(userEmail.equals(email)){
+                if(userPassword.equals(password) || userPassword.equals(password1)){
                     return true;
                 }
             }

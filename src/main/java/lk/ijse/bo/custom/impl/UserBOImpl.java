@@ -31,8 +31,8 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public boolean checkUserCredential(String email, String password) throws SQLException {
-        return userDAO.checkUserCredential(email, password);
+    public boolean checkUserCredential(String email, String password, String password1) throws SQLException {
+        return userDAO.checkUserCredential(email, password, password1);
     }
 
     @Override
