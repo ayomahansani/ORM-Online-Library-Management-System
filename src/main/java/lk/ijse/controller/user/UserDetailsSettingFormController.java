@@ -12,6 +12,7 @@ import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.UserBO;
 import lk.ijse.controller.both.LoginFormController;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -123,11 +124,26 @@ public class UserDetailsSettingFormController {
                         lblEmail.setText(newEmail);
                         lblPassword.setText(newPw);
 
-                        new Alert(Alert.AlertType.CONFIRMATION, "Changed Successfully!").show();
+                        try{
 
-                        txtNewName.setText("");
+                            Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/both/login_form.fxml"));
+                            Scene scene = new Scene(rootNode);
+                            settingPage.getChildren().clear();
+                            Stage primaryStage = (Stage) settingPage.getScene().getWindow();
+                            primaryStage.setScene(scene);
+                            primaryStage.centerOnScreen();
+                            primaryStage.setTitle("Login Form");
+
+                        }catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        new Alert(Alert.AlertType.CONFIRMATION, "Changed Successfully! Please log in again.").show();
+
+                        /*txtNewName.setText("");
                         txtNewEmail.setText("");
-                        txtNewPw.setText("");
+                        txtNewPw.setText("");*/
+
                     }
 
                 }catch (SQLException e) {

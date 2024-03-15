@@ -4,38 +4,66 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userSignUpPage" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserRegisterFormController">
+<AnchorPane fx:id="userSignUpPage" prefHeight="525.0" prefWidth="600.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserRegisterFormController">
     <children>
-        <Label layoutX="232.0" layoutY="25.0" prefHeight="36.0" prefWidth="165.0" text="User Sign Up">
+        <Label layoutX="208.0" layoutY="24.0" prefHeight="38.0" prefWidth="184.0" text="User Sign Up">
             <font>
-                <Font size="29.0" />
+                <Font name="Times New Roman" size="33.0" />
             </font>
         </Label>
-        <TextField fx:id="txtName" layoutX="112.0" layoutY="107.0" onAction="#txtNameOnAction" prefHeight="35.0" prefWidth="376.0" />
-        <TextField fx:id="txtEmail" layoutX="112.0" layoutY="170.0" onAction="#txtEmailOnAction" prefHeight="35.0" prefWidth="376.0" />
-        <Label layoutX="112.0" layoutY="86.0" prefHeight="21.0" prefWidth="120.0" text="Name" />
-        <Label layoutX="112.0" layoutY="149.0" prefHeight="21.0" prefWidth="120.0" text="Email" />
-        <TextField fx:id="txtPassword" layoutX="112.0" layoutY="235.0" prefHeight="35.0" prefWidth="376.0" />
-        <Label layoutX="112.0" layoutY="214.0" prefHeight="21.0" prefWidth="120.0" text="Password" />
-        <Button fx:id="btnRegister" layoutX="221.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="48.0" prefWidth="158.0" text="Register">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Button>
-        <JFXComboBox fx:id="cmbBranchAddress" layoutX="112.0" layoutY="328.0" prefHeight="27.0" prefWidth="240.0" />
-        <Label layoutX="112.0" layoutY="308.0" prefHeight="21.0" prefWidth="144.0" text="Select the branch" />
-      <Label layoutX="129.0" layoutY="459.0" prefHeight="19.0" prefWidth="184.0" text="Already have an account ?">
+        <TextField fx:id="txtName" layoutX="112.0" layoutY="107.0" onAction="#txtNameOnAction" prefHeight="35.0" prefWidth="376.0">
+         <effect>
+            <DropShadow color="#00000034" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect></TextField>
+        <TextField fx:id="txtEmail" layoutX="112.0" layoutY="177.0" onAction="#txtEmailOnAction" prefHeight="35.0" prefWidth="376.0">
+         <effect>
+            <DropShadow color="#00000034" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect></TextField>
+        <Label layoutX="114.0" layoutY="84.0" prefHeight="21.0" prefWidth="120.0" text="Name">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="16.0" />
+         </font></Label>
+        <Label layoutX="114.0" layoutY="154.0" prefHeight="21.0" prefWidth="120.0" text="Email">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Label>
+        <TextField fx:id="txtPassword" layoutX="112.0" layoutY="245.0" prefHeight="35.0" prefWidth="376.0">
+         <effect>
+            <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect></TextField>
+        <Label layoutX="114.0" layoutY="222.0" prefHeight="21.0" prefWidth="120.0" text="Password">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Label>
+        <Button fx:id="btnRegister" layoutX="208.0" layoutY="403.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="38.0" prefWidth="184.0" text="Register">
+            <font>
+                <Font name="Times New Roman" size="23.0" />
+            </font>
+         <effect>
+            <DropShadow color="#0000004d" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+         </effect>
+        </Button>
+        <JFXComboBox fx:id="cmbBranchAddress" layoutX="112.0" layoutY="334.0" prefHeight="35.0" prefWidth="240.0" />
+        <Label layoutX="114.0" layoutY="314.0" prefHeight="21.0" prefWidth="120.0" text="Select the branch">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Label>
+      <Label layoutX="98.0" layoutY="484.0" prefHeight="19.0" prefWidth="184.0" text="Already have an account ?">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btnLoginHere" layoutX="394.0" layoutY="455.0" mnemonicParsing="false" onAction="#btnLoginHereOnAction" style="-fx-background-color: transparent;" text="Login Here" underline="true" />
-      <Label layoutX="112.0" layoutY="270.0" prefHeight="21.0" prefWidth="174.0" text="Must have at least 8 characters">
+      <Button fx:id="btnLoginHere" layoutX="392.0" layoutY="481.0" mnemonicParsing="false" onAction="#btnLoginHereOnAction" style="-fx-background-color: transparent;" text="Login Here" underline="true">
          <font>
-            <Font size="10.0" />
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
+      <Label layoutX="326.0" layoutY="286.0" prefHeight="21.0" prefWidth="165.0" text="Must have at least 8 characters">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
          </font>
       </Label>
     </children>

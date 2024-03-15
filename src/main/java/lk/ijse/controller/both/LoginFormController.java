@@ -95,7 +95,7 @@ public class LoginFormController {
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {
 
-        String adminOruser = cmbAdminOrUser.getValue();
+        /*String adminOruser = cmbAdminOrUser.getValue();
 
         if(adminOruser.equals("Admin")){
             Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/admin/admin_main_form.fxml"));
@@ -114,9 +114,9 @@ public class LoginFormController {
             primaryStage.setScene(scene);
             primaryStage.centerOnScreen();
             primaryStage.setTitle("Admin Main Form");
-        }
+        }*/
 
-        /*boolean isValidated = validateSignIn();
+        boolean isValidated = validateSignIn();
 
         if(isValidated){
 
@@ -175,7 +175,7 @@ public class LoginFormController {
                 new Alert(Alert.AlertType.INFORMATION, "Please fill all fields!").show();
             }
 
-        }*/
+        }
 
     }
 
