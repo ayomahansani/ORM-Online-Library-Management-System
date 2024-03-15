@@ -6,22 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="popUpPage" prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: #cccccc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.UsersNotReturnedWithinDueDateFormController">
+<AnchorPane fx:id="popUpPage" prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: black; -fx-font-size: 15;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.UsersNotReturnedWithinDueDateFormController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="26.0" prefHeight="47.0" prefWidth="439.0" text="Users who have not returned borrowed books">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="26.0" prefHeight="47.0" prefWidth="439.0" text="Users who have not returned borrowed books" textFill="WHITE">
          <font>
-            <Font name="Times New Roman" size="22.0" />
+            <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="61.0" prefHeight="47.0" prefWidth="439.0" text="within the due date">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="61.0" prefHeight="47.0" prefWidth="439.0" text="within the due date" textFill="WHITE">
          <font>
-            <Font name="Times New Roman" size="22.0" />
+            <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="tblUsers" layoutX="157.0" layoutY="141.0" prefHeight="270.0" prefWidth="288.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2;">
+      <TableView fx:id="tblUsers" layoutX="156.0" layoutY="154.0" prefHeight="257.0" prefWidth="288.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2;">
         <columns>
-          <TableColumn fx:id="colUsername" prefWidth="285.0" style="-fx-background-color: transparent;" text="Readers" />
+          <TableColumn fx:id="colUsername" prefWidth="285.0" style="-fx-background-color: transparent; -fx-background-color: grey;" text="Readers" />
         </columns>
       </TableView>
    </children>

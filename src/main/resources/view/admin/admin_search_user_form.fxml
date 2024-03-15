@@ -21,15 +21,18 @@
       </TableView>
       <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="1160.0" style="-fx-background-color: black;" text="User's History" textFill="WHITE">
          <font>
-            <Font name="Apple LiSung Light" size="32.0" />
+            <Font name="Times New Roman" size="33.0" />
          </font>
       </Label>
       <Label layoutX="423.0" layoutY="112.0" opacity="0.8" prefHeight="27.0" prefWidth="113.0" text="Select the user" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="cmbUsers" focusColor="WHITE" layoutX="424.0" layoutY="152.0" onAction="#cmbUsersOnAction" prefHeight="34.0" prefWidth="340.0" promptText="choose user" stylesheets="@../../style/comboBox.css" />
-      <Button fx:id="btnViewMore" layoutX="1000.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnViewMoreOnAction" prefHeight="34.0" prefWidth="104.0" style="-fx-background-color: #9d9d9d;" text="View More" textFill="WHITE" />
+      <Button fx:id="btnViewMore" layoutX="1000.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnViewMoreOnAction" prefHeight="34.0" prefWidth="104.0" style="-fx-background-color: #9d9d9d;" text="View More" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -12,17 +12,17 @@
     <children>
         <TextField fx:id="txtBranchId" layoutX="109.0" layoutY="209.0" onAction="#txtBranchIdOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="id">
             <font>
-                <Font size="17.0" />
+                <Font name="Times New Roman" size="18.0" />
             </font>
         </TextField>
         <TextField fx:id="txtTel" layoutX="793.0" layoutY="208.0" onAction="#txtTelOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="tel">
             <font>
-                <Font size="17.0" />
+                <Font name="Times New Roman" size="18.0" />
             </font>
         </TextField>
         <TextField fx:id="txtAddress" layoutX="451.0" layoutY="208.0" onAction="#txtAddressOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="address">
             <font>
-                <Font size="17.0" />
+                <Font name="Times New Roman" size="18.0" />
             </font>
         </TextField>
         <TableView fx:id="tblBranches" layoutX="154.0" layoutY="375.0" opacity="0.8" prefHeight="263.0" prefWidth="852.0" style="-fx-border-color: black; -fx-border-width: 3;">
@@ -39,47 +39,47 @@
         </Label>
         <Label layoutX="110.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text=" Id" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="Times New Roman" size="17.0" />
             </font>
         </Label>
         <Label layoutX="794.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Tel" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="Times New Roman" size="17.0" />
             </font>
         </Label>
         <Label layoutX="454.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Address" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="Times New Roman" size="17.0" />
             </font>
         </Label>
       <Button fx:id="btnAdd" layoutX="208.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Add">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman" size="19.0" />
          </font>
       </Button>
       <Button fx:id="btnUpdate" layoutX="419.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Update">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman" size="19.0" />
          </font>
       </Button>
       <Button fx:id="btnRemove" layoutX="616.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnRemoveOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Remove">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman" size="19.0" />
          </font>
       </Button>
       <Button fx:id="btnClear" layoutX="832.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Clear">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman" size="19.0" />
          </font>
       </Button>
       <TextField fx:id="txtBranchSearch" layoutX="404.0" layoutY="106.0" onAction="#txtBranchSearchOnAction" opacity="0.8" prefHeight="35.0" prefWidth="347.0" promptText="Enter branch address">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="16.0" />
          </font>
       </TextField>
       <Label layoutX="334.0" layoutY="110.0" opacity="0.8" prefHeight="27.0" prefWidth="66.0" text="Search" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="Times New Roman" size="17.0" />
          </font>
       </Label>
     </children>

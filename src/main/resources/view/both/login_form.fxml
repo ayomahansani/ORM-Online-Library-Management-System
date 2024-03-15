@@ -10,61 +10,71 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginPage" prefHeight="525.0" prefWidth="600.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.both.LoginFormController">
+<AnchorPane fx:id="loginPage" prefHeight="579.0" prefWidth="934.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.both.LoginFormController">
    <children>
-      <Label layoutX="218.0" layoutY="30.0" prefHeight="46.0" prefWidth="167.0" text="Login Form">
-         <font>
-            <Font name="Times New Roman" size="33.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtUsername" layoutX="112.0" layoutY="222.0" onAction="#txtUsernameOnAction" prefHeight="35.0" prefWidth="376.0">
-         <effect>
-            <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
-         </effect></TextField>
-      <TextField fx:id="txtPassword" layoutX="112.0" layoutY="294.0" onAction="#txtPasswordOnAction" prefHeight="35.0" prefWidth="376.0" />
-      <Button fx:id="btnLogin" layoutX="208.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="184.0" style="-fx-background-color: grey;" text="Login">
-         <font>
-            <Font name="Times New Roman" size="23.0" />
-         </font>
-         <effect>
-            <DropShadow color="#0000004c" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
-         </effect>
-      </Button>
-      <Label layoutX="112.0" layoutY="191.0" prefHeight="21.0" prefWidth="277.0" text="Username ( Enter your email )">
-         <font>
-            <Font name="Times New Roman" size="16.0" />
-         </font></Label>
-      <Label layoutX="112.0" layoutY="266.0" prefHeight="21.0" prefWidth="120.0" text="Password">
-         <font>
-            <Font name="Times New Roman" size="16.0" />
-         </font></Label>
-      <JFXComboBox fx:id="cmbAdminOrUser" layoutX="112.0" layoutY="130.0" prefHeight="35.0" prefWidth="144.0" />
-      <Label layoutX="112.0" layoutY="109.0" prefHeight="21.0" prefWidth="120.0" text="Admin Or User ?">
-         <font>
-            <Font name="Times New Roman" size="16.0" />
-         </font></Label>
-      <Label layoutX="113.0" layoutY="481.0" prefHeight="19.0" prefWidth="161.0" text="Don't have an account ?">
-         <font>
-            <Font name="Times New Roman" size="15.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnSignupHere" layoutX="349.0" layoutY="477.0" mnemonicParsing="false" onAction="#btnSignupHereOnAction" style="-fx-background-color: transparent;" text="Signup Here " underline="true">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font></Button>
-      <Button fx:id="btnForgotPassword" layoutX="105.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnForgotPasswordOnAction" prefHeight="27.0" prefWidth="144.0" style="-fx-background-color: transparent;" text="Forgot your password ?" underline="true">
-         <font>
-            <Font name="Times New Roman" size="13.0" />
-         </font>
-      </Button>
-      <PasswordField fx:id="passwordField" layoutX="113.0" layoutY="294.0" onAction="#passwordFieldOnAction" prefHeight="35.0" prefWidth="376.0">
-         <effect>
-            <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
-         </effect></PasswordField>
-      <CheckBox fx:id="checkBoxPw" layoutX="383.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkBoxPwOnAction" text="View Password">
-         <font>
-            <Font name="Times New Roman" size="13.0" />
-         </font>
-      </CheckBox>
+      <AnchorPane layoutX="474.0" layoutY="29.0" prefHeight="521.0" prefWidth="434.0" style="-fx-background-color: yellow;">
+         <children>
+            <Label layoutX="136.0" layoutY="24.0" prefHeight="46.0" prefWidth="167.0" text="Login Form">
+               <font>
+                  <Font name="Times New Roman" size="33.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsername" layoutX="30.0" layoutY="216.0" onAction="#txtUsernameOnAction" prefHeight="35.0" prefWidth="376.0">
+               <effect>
+                  <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+               </effect>
+            </TextField>
+            <TextField fx:id="txtPassword" layoutX="30.0" layoutY="288.0" onAction="#txtPasswordOnAction" prefHeight="35.0" prefWidth="376.0" />
+            <Button fx:id="btnLogin" layoutX="126.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="184.0" style="-fx-background-color: grey;" text="Login">
+               <font>
+                  <Font name="Times New Roman" size="23.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#0000004c" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+               </effect>
+            </Button>
+            <Label layoutX="30.0" layoutY="185.0" prefHeight="21.0" prefWidth="277.0" text="Username ( Enter your email )">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="260.0" prefHeight="21.0" prefWidth="120.0" text="Password">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="cmbAdminOrUser" layoutX="30.0" layoutY="124.0" prefHeight="35.0" prefWidth="144.0" />
+            <Label layoutX="30.0" layoutY="103.0" prefHeight="21.0" prefWidth="120.0" text="Admin Or User ?">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="475.0" prefHeight="19.0" prefWidth="161.0" text="Don't have an account ?">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSignupHere" layoutX="267.0" layoutY="471.0" mnemonicParsing="false" onAction="#btnSignupHereOnAction" style="-fx-background-color: transparent;" text="Signup Here " underline="true">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnForgotPassword" layoutX="23.0" layoutY="327.0" mnemonicParsing="false" onAction="#btnForgotPasswordOnAction" prefHeight="27.0" prefWidth="144.0" style="-fx-background-color: transparent;" text="Forgot your password ?" underline="true">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="passwordField" layoutX="31.0" layoutY="288.0" onAction="#passwordFieldOnAction" prefHeight="35.0" prefWidth="376.0">
+               <effect>
+                  <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+               </effect>
+            </PasswordField>
+            <CheckBox fx:id="checkBoxPw" layoutX="301.0" layoutY="263.0" mnemonicParsing="false" onAction="#checkBoxPwOnAction" text="View Password">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
