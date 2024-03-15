@@ -10,9 +10,9 @@
 
 <AnchorPane fx:id="dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserDashboardFormController">
     <children>
-        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="1012.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home / Dashboard" wrappingWidth="133.9999967366457">
+        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="1012.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home / Dashboard" wrappingWidth="133.9999967366457">
             <font>
-                <Font size="16.0" />
+                <Font name="Times New Roman" size="17.0" />
             </font>
         </Text>
       <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="68.0" layoutY="141.0" mnemonicParsing="false" opacity="0.81" prefHeight="387.0" prefWidth="297.0" style="-fx-background-color: grey;" text="Borrowed Books" textAlignment="RIGHT" textFill="#171717">
@@ -31,7 +31,10 @@
             <InnerShadow />
          </effect>
       </Label>
-      <Button layoutX="169.0" layoutY="449.0" mnemonicParsing="false" onAction="#borrowedBooksViewOnAction" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: transparent;" text="View more" textFill="WHITE" underline="true" />
+      <Button layoutX="171.0" layoutY="450.0" mnemonicParsing="false" onAction="#borrowedBooksViewOnAction" prefHeight="28.0" prefWidth="92.0" style="-fx-background-color: transparent;" text="view more" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Button>
       <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="441.0" layoutY="142.0" mnemonicParsing="false" opacity="0.81" prefHeight="387.0" prefWidth="297.0" style="-fx-background-color: grey;" text="Returned Books" textAlignment="RIGHT" textFill="#171717">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
@@ -40,7 +43,10 @@
             <DropShadow color="WHITE" offsetX="7.0" offsetY="7.0" />
          </effect>
       </Button>
-      <Button layoutX="547.0" layoutY="450.0" mnemonicParsing="false" onAction="#returnedBooksViewOnAction" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: transparent;" text="View more" textFill="WHITE" underline="true" />
+      <Button layoutX="547.0" layoutY="450.0" mnemonicParsing="false" onAction="#returnedBooksViewOnAction" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: transparent;" text="view more" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Button>
       <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="813.0" layoutY="141.0" mnemonicParsing="false" opacity="0.81" prefHeight="387.0" prefWidth="297.0" style="-fx-background-color: grey;" text="Pending Books" textAlignment="RIGHT" textFill="#171717">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
@@ -49,7 +55,10 @@
             <DropShadow color="WHITE" offsetX="7.0" offsetY="7.0" />
          </effect>
       </Button>
-      <Button layoutX="919.0" layoutY="449.0" mnemonicParsing="false" onAction="#haveToReturnViewOnAction" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: transparent;" text="View more" textFill="WHITE" underline="true" />
+      <Button layoutX="919.0" layoutY="449.0" mnemonicParsing="false" onAction="#haveToReturnViewOnAction" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: transparent;" text="view more" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Button>
       <Label fx:id="lblNoOfReturnedBooks" alignment="CENTER" layoutX="554.0" layoutY="224.0" opacity="0.69" prefHeight="62.0" prefWidth="69.0" style="-fx-background-color: black; -fx-background-radius: 5;" textFill="WHITE">
          <font>
             <Font name="Calibri" size="29.0" />

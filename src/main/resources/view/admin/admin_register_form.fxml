@@ -38,7 +38,7 @@
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font></Label>
-        <Button fx:id="btnRegister" layoutX="201.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="38.0" prefWidth="184.0" text="Register">
+        <Button fx:id="btnRegister" layoutX="201.0" layoutY="374.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: grey;" text="Register">
             <font>
                 <Font name="Times New Roman" size="23.0" />
             </font>

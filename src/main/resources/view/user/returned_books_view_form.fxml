@@ -6,10 +6,10 @@
 
 <AnchorPane fx:id="returnedBooksViewPage" prefHeight="447.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.ReturnedBooksViewFormController">
     <children>
-        <TableView fx:id="tblReturnedBooks" layoutX="27.0" layoutY="28.0" prefHeight="392.0" prefWidth="391.0" style="-fx-border-color: black; -fx-border-width: 3;">
+        <TableView fx:id="tblReturnedBooks" layoutX="27.0" layoutY="28.0" prefHeight="392.0" prefWidth="391.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: transparent;">
             <columns>
-                <TableColumn fx:id="colBookTitle" prefWidth="204.0" style="-fx-border-color: black;" text="Book" />
-                <TableColumn fx:id="colReturnedDate" prefWidth="184.0" style="-fx-border-color: black;" text="Returned  Date" />
+                <TableColumn fx:id="colBookTitle" prefWidth="204.0" style="-fx-border-color: black; -fx-background-color: grey; -fx-font-size: 15;" text="Book" />
+                <TableColumn fx:id="colReturnedDate" prefWidth="184.0" style="-fx-border-color: black; -fx-background-color: grey; -fx-font-size: 15;" text="Returned  Date" />
             </columns>
         </TableView>
     </children>

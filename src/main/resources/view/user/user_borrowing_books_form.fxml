@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,21 +14,24 @@
    <children>
       <TextField fx:id="txtSearchBar" layoutX="101.0" layoutY="112.0" onAction="#txtSearchBarOnAction" prefHeight="35.0" prefWidth="364.0" promptText="Enter book name">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="btnSearch" layoutX="502.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="27.0" prefWidth="113.0" text="Search">
+      <Button fx:id="btnSearch" layoutX="502.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="27.0" prefWidth="113.0" style="-fx-background-color: grey;" text="Search">
          <font>
-            <Font size="16.0" />
+            <Font name="Times New Roman" size="16.0" />
          </font>
+         <effect>
+            <DropShadow color="#0000004d" height="17.0" offsetX="7.0" offsetY="7.0" radius="8.0" width="17.0" />
+         </effect>
       </Button>
-      <JFXComboBox fx:id="cmbSelectBookGenre" layoutX="827.0" layoutY="73.0" onAction="#cmbSelectBookGenreOnActions" prefHeight="41.0" prefWidth="238.0" promptText="select the genre" />
-      <Label layoutX="830.0" layoutY="41.0" prefHeight="32.0" prefWidth="77.0" text="Filter books" textFill="WHITE">
+      <JFXComboBox fx:id="cmbSelectBookGenre" focusColor="WHITE" layoutX="809.0" layoutY="73.0" onAction="#cmbSelectBookGenreOnActions" prefHeight="41.0" prefWidth="238.0" promptText="select the genre" unFocusColor="#545454" />
+      <Label layoutX="811.0" layoutY="41.0" prefHeight="32.0" prefWidth="95.0" text="Filter books" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tblBooks" layoutX="95.0" layoutY="233.0" opacity="0.8" prefHeight="370.0" prefWidth="970.0" style="-fx-border-color: black; -fx-border-width: 3;">
+      <TableView fx:id="tblBooks" layoutX="95.0" layoutY="233.0" opacity="0.8" prefHeight="370.0" prefWidth="970.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: transparent;">
          <columns>
             <TableColumn fx:id="colTitle" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Title" />
             <TableColumn fx:id="colAuthor" prefWidth="329.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Author" />
@@ -35,6 +39,12 @@
             <TableColumn fx:id="colAvailabilityStatus" prefWidth="163.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Availability Status" />
          </columns>
       </TableView>
-      <Button fx:id="btnNone" layoutX="1072.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnNoneOnAction" prefHeight="20.0" prefWidth="63.0" style="-fx-background-color: transparent;" text="None" textFill="#dddddd" />
+      <Button fx:id="btnNone" layoutX="1065.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnNoneOnAction" prefHeight="20.0" prefWidth="63.0" style="-fx-background-color: grey;" text="None">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow color="#0d0d0d4d" height="17.0" offsetX="7.0" offsetY="7.0" radius="8.0" width="17.0" />
+         </effect></Button>
    </children>
 </AnchorPane>
