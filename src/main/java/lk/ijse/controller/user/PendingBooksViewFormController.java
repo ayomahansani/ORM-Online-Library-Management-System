@@ -69,6 +69,7 @@ public class PendingBooksViewFormController {
                 boolean isReturn = historyDto.is_return();
 
                 Button returnBtn = new Button("Return Now");
+                returnBtn.setStyle("-fx-background-color: rgba(255,216,118,20)");
 
                 setReturnBtnAction(returnBtn, historyDto);
                 returnBtn.setCursor(Cursor.HAND);
