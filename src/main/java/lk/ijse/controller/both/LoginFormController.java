@@ -186,6 +186,7 @@ public class LoginFormController {
         loginPage.getChildren().clear();
         Stage primaryStage = (Stage) loginPage.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Register Form");
     }
 
@@ -196,6 +197,7 @@ public class LoginFormController {
         loginPage.getChildren().clear();
         Stage primaryStage = (Stage) loginPage.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Reset Password Form");
     }
 

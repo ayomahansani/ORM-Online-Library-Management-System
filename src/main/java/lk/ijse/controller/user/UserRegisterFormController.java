@@ -157,6 +157,7 @@ public class UserRegisterFormController {
         userSignUpPage.getChildren().clear();
         Stage primaryStage = (Stage) userSignUpPage.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Login Form");
     }
 

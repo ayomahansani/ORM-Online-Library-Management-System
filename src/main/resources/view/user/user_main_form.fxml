@@ -2,64 +2,76 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="user_main_form" prefHeight="849.0" prefWidth="1442.0" style="-fx-background-color: E9E8E8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserMainFormController">
+<AnchorPane fx:id="user_main_form" prefHeight="849.0" prefWidth="1442.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserMainFormController">
     <children>
-        <AnchorPane layoutX="261.0" layoutY="14.0" prefHeight="80.0" prefWidth="1166.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+      <ImageView fitHeight="962.0" fitWidth="1452.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/login-page.jpg" />
+         </image>
+      </ImageView>
+        <AnchorPane layoutX="261.0" layoutY="14.0" opacity="0.75" prefHeight="80.0" prefWidth="1166.0" style="-fx-background-color: EBC49F; -fx-background-radius: 10;">
             <children>
-                <Label fx:id="lblTodayDate" layoutX="59.0" layoutY="25.0" prefHeight="30.0" prefWidth="144.0" textFill="WHITE">
+                <Label fx:id="lblTodayDate" layoutX="45.0" layoutY="25.0" prefHeight="30.0" prefWidth="144.0" textFill="#532e1c">
                     <font>
-                        <Font name="Times New Roman Bold" size="20.0" />
+                        <Font name="Times New Roman Bold" size="24.0" />
                     </font></Label>
-                <Label fx:id="lblTodayDate1" layoutX="320.0" layoutY="25.0" prefHeight="30.0" prefWidth="155.0" text="SUNDAY" textFill="WHITE">
+                <Label fx:id="lblTodayDate1" layoutX="342.0" layoutY="25.0" prefHeight="30.0" prefWidth="155.0" text="SUNDAY" textFill="#532e1c">
                     <font>
-                        <Font name="Times New Roman Bold" size="22.0" />
+                        <Font name="Times New Roman Bold" size="24.0" />
                     </font>
                 </Label>
-                <Text fill="WHITE" layoutX="752.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BookWorm Online Library" wrappingWidth="382.9999925494194">
+                <Text fill="#532e1c" layoutX="752.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BookWorm Online Library" wrappingWidth="382.9999925494194">
                     <font>
                         <Font name="Times New Roman Bold" size="32.0" />
                     </font>
                 </Text>
-                <Label fx:id="lblCurrentTime" layoutX="203.0" layoutY="27.0" prefHeight="26.0" prefWidth="85.0" textFill="WHITE">
+                <Label fx:id="lblCurrentTime" layoutX="202.0" layoutY="26.0" prefHeight="28.0" prefWidth="111.0" textFill="#532e1c">
                     <font>
-                        <Font name="Times New Roman" size="20.0" />
+                        <Font name="Times New Roman Bold" size="24.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="753.0" prefWidth="232.0" style="-fx-background-color: black; -fx-background-radius: 10;">
+        <AnchorPane layoutX="14.0" layoutY="12.0" opacity="0.75" prefHeight="753.0" prefWidth="232.0" style="-fx-background-color: EBC49F; -fx-background-radius: 10;">
             <children>
-                <Button fx:id="btnDashboard" layoutX="1.0" layoutY="231.0" mnemonicParsing="false" onAction="#btnDashboardOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="DashBoard" textFill="WHITE">
+                <Button fx:id="btnDashboard" layoutX="3.0" layoutY="231.0" mnemonicParsing="false" onAction="#btnDashboardOnAction" prefHeight="56.0" prefWidth="226.0" style="-fx-background-color: #532e1c; -fx-border-color: #532e1c;" text="DashBoard" textFill="#ebc49f">
                     <font>
-                        <Font name="Times New Roman" size="22.0" />
+                        <Font name="Times New Roman Bold" size="22.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnBooks" layoutX="1.0" layoutY="341.0" mnemonicParsing="false" onAction="#btnBooksOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Books" textFill="WHITE">
+                <Button fx:id="btnBooks" layoutX="3.0" layoutY="341.0" mnemonicParsing="false" onAction="#btnBooksOnAction" prefHeight="56.0" prefWidth="226.0" style="-fx-background-color: #532e1c; -fx-border-color: #532e1c;" text="Books" textFill="#ebc49f">
                     <font>
-                        <Font name="Times New Roman" size="22.0" />
+                        <Font name="Times New Roman Bold" size="22.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnLogout" layoutX="1.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Log Out" textFill="WHITE">
+                <Button fx:id="btnLogout" layoutX="3.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="56.0" prefWidth="226.0" style="-fx-background-color: #532e1c; -fx-border-color: #532e1c;" text="Log Out" textFill="#ebc49f">
                     <font>
-                        <Font name="Times New Roman" size="22.0" />
+                        <Font name="Times New Roman Bold" size="22.0" />
                     </font>
                 </Button>
-            <Button fx:id="btnMyHistory" layoutX="1.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnMyHistoryOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="My History" textFill="WHITE">
+            <Button fx:id="btnMyHistory" layoutX="3.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnMyHistoryOnAction" prefHeight="56.0" prefWidth="226.0" style="-fx-background-color: #532e1c; -fx-border-color: #532e1c;" text="My History" textFill="#ebc49f">
                <font>
-                  <Font name="Times New Roman" size="22.0" />
+                  <Font name="Times New Roman Bold" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnSettings" layoutX="1.0" layoutY="571.0" mnemonicParsing="false" onAction="#btnSettingsOnAction" prefHeight="56.0" prefWidth="229.0" style="-fx-background-color: black; -fx-border-color: white;" text="Settings" textFill="WHITE">
+            <Button fx:id="btnSettings" layoutX="3.0" layoutY="571.0" mnemonicParsing="false" onAction="#btnSettingsOnAction" prefHeight="56.0" prefWidth="226.0" style="-fx-background-color: #532e1c; -fx-border-color: #532e1c; -fx-border-width: 3;" text="Settings" textFill="#ebc49f">
                <font>
-                  <Font name="Times New Roman" size="22.0" />
+                  <Font name="Times New Roman Bold" size="22.0" />
                </font>
             </Button>
+            <ImageView fitHeight="136.0" fitWidth="144.0" layoutX="48.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/book-reader.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="user_dashboard" layoutX="266.0" layoutY="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: black;" />
+        <AnchorPane fx:id="user_dashboard" layoutX="266.0" layoutY="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: EBC49F;" />
     </children>
 </AnchorPane>

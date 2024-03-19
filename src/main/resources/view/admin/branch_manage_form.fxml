@@ -5,82 +5,119 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="branchForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.BranchManageFormController">
+<AnchorPane fx:id="branchForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: EBC49F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.BranchManageFormController">
     <children>
-        <TextField fx:id="txtBranchId" layoutX="109.0" layoutY="209.0" onAction="#txtBranchIdOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="id">
+        <TextField fx:id="txtBranchId" layoutX="109.0" layoutY="190.0" onAction="#txtBranchIdOnAction" prefHeight="35.0" prefWidth="258.0" promptText="id" stylesheets="@../../style/textfield.css">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
+         <effect>
+            <DropShadow color="#522c1d99" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect>
         </TextField>
-        <TextField fx:id="txtTel" layoutX="793.0" layoutY="208.0" onAction="#txtTelOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="tel">
+        <TextField fx:id="txtTel" layoutX="793.0" layoutY="189.0" onAction="#txtTelOnAction" prefHeight="35.0" prefWidth="258.0" promptText="tel" stylesheets="@../../style/textfield.css">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
+         <effect>
+            <DropShadow color="#522c1d9a" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect>
         </TextField>
-        <TextField fx:id="txtAddress" layoutX="451.0" layoutY="208.0" onAction="#txtAddressOnAction" opacity="0.8" prefHeight="35.0" prefWidth="258.0" promptText="address">
+        <TextField fx:id="txtAddress" layoutX="451.0" layoutY="189.0" onAction="#txtAddressOnAction" prefHeight="35.0" prefWidth="258.0" promptText="address" stylesheets="@../../style/textfield.css">
             <font>
                 <Font name="Times New Roman" size="18.0" />
             </font>
+         <effect>
+            <DropShadow color="#522c1d9b" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect>
         </TextField>
-        <TableView fx:id="tblBranches" layoutX="154.0" layoutY="375.0" opacity="0.8" prefHeight="263.0" prefWidth="852.0" style="-fx-border-color: black; -fx-border-width: 3;">
+        <TableView fx:id="tblBranches" layoutX="154.0" layoutY="356.0" opacity="0.8" prefHeight="265.0" prefWidth="852.0" style="-fx-border-color: #532e1c; -fx-border-width: 3; -fx-background-color: transparent;">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="207.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Id" />
-                <TableColumn fx:id="colAddress" prefWidth="418.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Address" />
-                <TableColumn fx:id="colTel" prefWidth="219.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-size: 15;" text="Tel" />
+                <TableColumn fx:id="colId" prefWidth="207.0" style="-fx-background-color: EBC49F; -fx-border-color: #532e1c; -fx-border-width: 1; -fx-font-size: 15; -fx-font-style: Bold;" text="Id" />
+                <TableColumn fx:id="colAddress" prefWidth="418.0" style="-fx-background-color: EBC49F; -fx-border-color: #532e1c; -fx-border-width: 1; -fx-font-size: 15; -fx-font-style: Bold;" text="Address" />
+                <TableColumn fx:id="colTel" prefWidth="219.0" style="-fx-background-color: EBC49F; -fx-border-color: #532e1c; -fx-border-width: 1; -fx-font-size: 15; -fx-font-style: Bold;" text="Tel" />
             </columns>
         </TableView>
-        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="1160.0" style="-fx-background-color: black;" text="Branch Manage" textFill="WHITE">
+        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="1160.0" style="-fx-background-color: EBC49F;" text="Branch Manage" textFill="#532e1c">
             <font>
-                <Font name="Apple LiSung Light" size="32.0" />
+                <Font name="Times New Roman Bold" size="32.0" />
             </font>
         </Label>
-        <Label layoutX="110.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text=" Id" textFill="WHITE">
+        <Label layoutX="110.0" layoutY="164.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text=" Id" textFill="#532e1c">
             <font>
-                <Font name="Times New Roman" size="17.0" />
+                <Font name="Times New Roman Bold" size="17.0" />
             </font>
         </Label>
-        <Label layoutX="794.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Tel" textFill="WHITE">
+        <Label layoutX="794.0" layoutY="164.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Tel" textFill="#532e1c">
             <font>
-                <Font name="Times New Roman" size="17.0" />
+                <Font name="Times New Roman Bold" size="17.0" />
             </font>
         </Label>
-        <Label layoutX="454.0" layoutY="183.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Address" textFill="WHITE">
+        <Label layoutX="454.0" layoutY="164.0" opacity="0.8" prefHeight="17.0" prefWidth="146.0" text="Address" textFill="#532e1c">
             <font>
-                <Font name="Times New Roman" size="17.0" />
+                <Font name="Times New Roman Bold" size="17.0" />
             </font>
         </Label>
-      <Button fx:id="btnAdd" layoutX="208.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Add">
+      <Button fx:id="btnAdd" layoutX="208.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #532e1c;" text="Add" textFill="#ebc49f">
          <font>
-            <Font name="Times New Roman" size="19.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
+         <effect>
+            <DropShadow color="#522c1d82" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+         </effect>
       </Button>
-      <Button fx:id="btnUpdate" layoutX="419.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Update">
+      <Button fx:id="btnUpdate" layoutX="419.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #532e1c;" text="Update" textFill="#ebc49f">
          <font>
-            <Font name="Times New Roman" size="19.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
+         <effect>
+            <DropShadow color="#522c1d80" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+         </effect>
       </Button>
-      <Button fx:id="btnRemove" layoutX="616.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnRemoveOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Remove">
+      <Button fx:id="btnRemove" layoutX="616.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnRemoveOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #532e1c;" text="Remove" textFill="#ebc49f">
          <font>
-            <Font name="Times New Roman" size="19.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
+         <effect>
+            <DropShadow color="#522c1d99" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+         </effect>
       </Button>
-      <Button fx:id="btnClear" layoutX="832.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: grey;" text="Clear">
+      <Button fx:id="btnClear" layoutX="832.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #532e1c;" text="Clear" textFill="#ebc49f">
          <font>
-            <Font name="Times New Roman" size="19.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
+         <effect>
+            <DropShadow color="#522c1d99" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+         </effect>
       </Button>
-      <TextField fx:id="txtBranchSearch" layoutX="404.0" layoutY="106.0" onAction="#txtBranchSearchOnAction" opacity="0.8" prefHeight="35.0" prefWidth="347.0" promptText="Enter branch address">
+      <TextField fx:id="txtBranchSearch" layoutX="404.0" layoutY="87.0" onAction="#txtBranchSearchOnAction" prefHeight="35.0" prefWidth="347.0" promptText="Enter branch address" stylesheets="@../../style/textfield.css">
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font>
+         <effect>
+            <DropShadow color="#522c1d99" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect>
       </TextField>
-      <Label layoutX="334.0" layoutY="110.0" opacity="0.8" prefHeight="27.0" prefWidth="66.0" text="Search" textFill="WHITE">
+      <Label layoutX="334.0" layoutY="91.0" opacity="0.8" prefHeight="27.0" prefWidth="66.0" text="Search" textFill="#532e1c">
          <font>
-            <Font name="Times New Roman" size="17.0" />
+            <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Label>
+      <ImageView fitHeight="99.0" fitWidth="120.0" layoutX="1051.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-branches-100-2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="47.0" layoutX="716.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-search-26.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

@@ -29,6 +29,7 @@ public class ForgotPasswordFormController {
         resetPasswordPage.getChildren().clear();
         Stage primaryStage = (Stage) resetPasswordPage.getScene().getWindow();
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.setTitle("Admin Reset Password Form");
     }
 

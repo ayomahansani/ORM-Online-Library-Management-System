@@ -4,11 +4,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="allBooksViewPage" prefHeight="434.0" prefWidth="255.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.AllBooksViewFormController">
+<AnchorPane fx:id="allBooksViewPage" opacity="0.75" prefHeight="434.0" prefWidth="255.0" style="-fx-background-color: #532e1c;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.AllBooksViewFormController">
    <children>
-      <TableView fx:id="tblAllBooks" layoutX="22.0" layoutY="21.0" prefHeight="392.0" prefWidth="212.0" style="-fx-border-color: grey; -fx-border-width: 3;">
+      <TableView fx:id="tblAllBooks" layoutX="22.0" layoutY="21.0" prefHeight="392.0" prefWidth="212.0" style="-fx-border-color: #532e1c; -fx-border-width: 3; -fx-background-color: EBC49F;">
          <columns>
-            <TableColumn fx:id="colBookName" prefWidth="204.0" style="-fx-border-color: grey; -fx-background-color: grey; -fx-font-size: 15;" text="Books" />
+            <TableColumn fx:id="colBookName" prefWidth="204.0" style="-fx-border-color: #532e1c; -fx-background-color: EBC49F; -fx-font-size: 15; -fx-border-width: 2;" text="Books" />
          </columns>
       </TableView>
    </children>

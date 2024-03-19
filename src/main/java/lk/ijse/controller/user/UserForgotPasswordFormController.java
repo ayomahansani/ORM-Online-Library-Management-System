@@ -83,6 +83,7 @@ public class UserForgotPasswordFormController {
                         userResetPwPage.getChildren().clear();
                         Stage primaryStage = (Stage) userResetPwPage.getScene().getWindow();
                         primaryStage.setScene(scene);
+                        primaryStage.centerOnScreen();
                         primaryStage.setTitle("Login Form");
 
                         new Alert(Alert.AlertType.CONFIRMATION, "Password Reset successful!!").show();

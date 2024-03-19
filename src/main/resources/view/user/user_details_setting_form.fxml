@@ -4,105 +4,140 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="settingPage" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserDetailsSettingFormController">
+<AnchorPane fx:id="settingPage" prefHeight="657.0" prefWidth="1160.0" style="-fx-background-color: EBC49F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.user.UserDetailsSettingFormController">
    <children>
-      <Label layoutX="191.0" layoutY="180.0" prefHeight="22.0" prefWidth="91.0" text="Your Name" textFill="WHITE">
+      <ImageView fitHeight="674.0" fitWidth="1160.0" layoutY="-7.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/72347.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="213.0" layoutY="178.0" prefHeight="22.0" prefWidth="91.0" text="Your Name" textFill="#532e1c">
          <font>
-            <Font name="Times New Roman" size="18.0" />
+            <Font name="Times New Roman Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="191.0" layoutY="329.0" prefHeight="22.0" prefWidth="91.0" text="Your Email" textFill="WHITE">
+      <Label layoutX="213.0" layoutY="327.0" prefHeight="22.0" prefWidth="91.0" text="Your Email" textFill="#532e1c">
          <font>
-            <Font name="Times New Roman" size="18.0" />
+            <Font name="Times New Roman Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="181.0" layoutY="481.0" prefHeight="22.0" prefWidth="112.0" text="Your Password" textFill="WHITE">
+      <Label layoutX="199.0" layoutY="478.0" prefHeight="22.0" prefWidth="119.0" text="Your Password" textFill="#532e1c">
          <font>
-            <Font name="Times New Roman" size="18.0" />
+            <Font name="Times New Roman Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblName" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="216.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: white;">
+      <Label fx:id="lblName" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="214.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: EBC49F; -fx-border-color: #532E1C; -fx-border-width: 2;" stylesheets="@../../style/textfield.css" textFill="#532e1c">
          <font>
-            <Font size="17.0" />
-         </font>
-         <effect>
-            <DropShadow color="#575757" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
-         </effect>
-      </Label>
-      <Label fx:id="lblEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="366.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: white;">
-         <font>
-            <Font size="17.0" />
+            <Font name="Times New Roman Bold" size="16.0" />
          </font>
          <effect>
-            <DropShadow color="#575757" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+            <DropShadow color="#522d1c99" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
          </effect>
       </Label>
-      <Label fx:id="lblPassword" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="519.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: white;">
+      <Label fx:id="lblEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="364.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: EBC49F; -fx-border-color: #532E1C; -fx-border-width: 2;" textFill="#532e1c">
          <font>
-            <Font size="17.0" />
+            <Font name="Times New Roman Bold" size="16.0" />
          </font>
          <effect>
-            <DropShadow color="#575757" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+            <DropShadow color="#522d1c99" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
          </effect>
       </Label>
-      <AnchorPane layoutX="585.0" layoutY="95.0" prefHeight="473.0" prefWidth="442.0" style="-fx-background-color: #c2bfbf;">
+      <Label fx:id="lblPassword" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="517.0" prefHeight="39.0" prefWidth="272.0" style="-fx-background-color: EBC49F; -fx-border-color: #532E1C; -fx-border-width: 2;" textFill="#532e1c">
+         <font>
+            <Font name="Times New Roman Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow color="#522d1c99" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
+         </effect>
+      </Label>
+      <AnchorPane layoutX="586.0" layoutY="115.0" prefHeight="503.0" prefWidth="442.0" style="-fx-background-color: #532E1C;">
          <children>
-            <Label layoutX="85.0" layoutY="22.0" prefHeight="47.0" prefWidth="272.0" text="Do you want to change your ">
+            <Label layoutX="86.0" layoutY="21.0" prefHeight="47.0" prefWidth="287.0" text="Do you want to change your " textFill="#ebc49f">
                <font>
-                  <Font name="Times New Roman" size="23.0" />
+                  <Font name="Times New Roman Bold" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="101.0" layoutY="211.0" prefHeight="22.0" prefWidth="171.0" text="Enter new email" textFill="#291dab">
+            <Label layoutX="94.0" layoutY="225.0" prefHeight="22.0" prefWidth="171.0" text="Enter new email" textFill="#ebc49f">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="103.0" layoutY="298.0" prefHeight="22.0" prefWidth="171.0" text="Enter new password" textFill="#291dab">
+            <Label layoutX="96.0" layoutY="312.0" prefHeight="22.0" prefWidth="171.0" text="Enter new password" textFill="#ebc49f">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="btnChange" layoutX="152.0" layoutY="398.0" mnemonicParsing="false" onAction="#btnChangeOnAction" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: grey;" text="Change" textFill="WHITE">
+            <Button fx:id="btnChange" layoutX="152.0" layoutY="420.0" mnemonicParsing="false" onAction="#btnChangeOnAction" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: EBC49F;" text="Change" textFill="#532e1c">
                <font>
-                  <Font name="Times New Roman" size="20.0" />
+                  <Font name="Times New Roman Bold" size="20.0" />
                </font>
                <effect>
-                  <DropShadow color="#00000033" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+                  <DropShadow color="#00000040" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
                </effect></Button>
-            <TextField fx:id="txtNewEmail" layoutX="101.0" layoutY="242.0" onAction="#txtNewEmailOnAction" prefHeight="31.0" prefWidth="255.0">
+            <TextField fx:id="txtNewEmail" layoutX="94.0" layoutY="256.0" onAction="#txtNewEmailOnAction" prefHeight="31.0" prefWidth="255.0" stylesheets="@../../style/textfield.css">
                <effect>
                   <DropShadow color="#00000034" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
                </effect></TextField>
-            <TextField fx:id="txtNewPw" layoutX="101.0" layoutY="327.0" onAction="#txtNewPwOnAction" prefHeight="31.0" prefWidth="255.0">
+            <TextField fx:id="txtNewPw" layoutX="94.0" layoutY="341.0" onAction="#txtNewPwOnAction" prefHeight="31.0" prefWidth="255.0" stylesheets="@../../style/textfield.css">
                <effect>
                   <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
                </effect></TextField>
-            <Label layoutX="74.0" layoutY="57.0" prefHeight="47.0" prefWidth="294.0" text="username, email or password ?">
+            <Label layoutX="76.0" layoutY="57.0" prefHeight="47.0" prefWidth="310.0" text="username, email or password ?" textFill="#ebc49f">
                <font>
-                  <Font name="Times New Roman" size="23.0" />
+                  <Font name="Times New Roman Bold" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="101.0" layoutY="127.0" prefHeight="22.0" prefWidth="171.0" text="Enter new name" textFill="#291dab">
+            <Label layoutX="94.0" layoutY="141.0" prefHeight="22.0" prefWidth="171.0" text="Enter new name" textFill="#ebc49f">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNewName" layoutX="101.0" layoutY="158.0" onAction="#txtNewNameOnAction" prefHeight="31.0" prefWidth="255.0">
+            <TextField fx:id="txtNewName" layoutX="94.0" layoutY="172.0" onAction="#txtNewNameOnAction" prefHeight="31.0" prefWidth="255.0" stylesheets="@../../style/textfield.css">
                <effect>
                   <DropShadow color="#00000033" height="13.0" offsetX="5.0" offsetY="5.0" radius="6.0" width="13.0" />
                </effect></TextField>
          </children>
+         <effect>
+            <DropShadow color="#522d1c99" height="13.0" offsetX="9.0" offsetY="9.0" radius="6.0" width="13.0" />
+         </effect>
       </AnchorPane>
-      <Button fx:id="btnDeleteAccount" layoutX="27.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnDeleteAccountOnAction" prefHeight="39.0" prefWidth="255.0" style="-fx-background-color: grey;" text="Delete my account" textFill="WHITE">
+      <Button fx:id="btnDeleteAccount" layoutX="22.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnDeleteAccountOnAction" prefHeight="39.0" prefWidth="228.0" style="-fx-background-color: #532E1C;" text="Delete my account" textFill="#ebc49f">
          <font>
             <Font name="Times New Roman" size="21.0" />
          </font>
          <effect>
-            <DropShadow color="#ffffff34" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
+            <DropShadow color="#522d1c7f" height="15.0" offsetX="7.0" offsetY="7.0" radius="7.0" width="15.0" />
          </effect>
       </Button>
+      <ImageView fitHeight="39.0" fitWidth="42.0" layoutX="265.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-delete-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="81.0" layoutX="828.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-change-password-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="738.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-change-user-100.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="61.0" layoutX="449.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-books-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="70.0" fitWidth="103.0" layoutX="22.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-view-64.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

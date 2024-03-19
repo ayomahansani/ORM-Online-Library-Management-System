@@ -3,25 +3,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="popUpPage" prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: black; -fx-font-size: 15;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.UsersNotReturnedWithinDueDateFormController">
+<AnchorPane fx:id="popUpPage" opacity="0.71" prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: #532e1c; -fx-font-size: 15; -fx-border-color: EBC49F; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.admin.UsersNotReturnedWithinDueDateFormController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="26.0" prefHeight="47.0" prefWidth="439.0" text="Users who have not returned borrowed books" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="26.0" prefHeight="47.0" prefWidth="439.0" text="Users who have not returned borrowed books" textFill="#ebc49f">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="61.0" prefHeight="47.0" prefWidth="439.0" text="within the due date" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="61.0" prefHeight="47.0" prefWidth="439.0" text="within the due date" textFill="#ebc49f">
          <font>
             <Font name="Times New Roman Bold" size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="tblUsers" layoutX="156.0" layoutY="154.0" prefHeight="257.0" prefWidth="288.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2;">
+      <TableView fx:id="tblUsers" layoutX="156.0" layoutY="154.0" prefHeight="257.0" prefWidth="288.0" style="-fx-background-color: EBC49F; -fx-border-color: white; -fx-border-width: 3; -fx-border-color: #532e1c;">
         <columns>
-          <TableColumn fx:id="colUsername" prefWidth="285.0" style="-fx-background-color: transparent; -fx-background-color: grey;" text="Readers" />
+          <TableColumn fx:id="colUsername" prefWidth="281.0" style="-fx-background-color: EBC49F; -fx-border-color: #532e1c; -fx-border-width: 2; -fx-font-size: 15;" text="Readers" />
         </columns>
       </TableView>
+      <ImageView fitHeight="29.0" fitWidth="25.0" layoutX="401.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-warning-64-2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="71.0" layoutX="506.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/icons8-book-reading-66.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
