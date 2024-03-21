@@ -77,6 +77,7 @@ public class TransactionBOImpl implements TransactionBO {
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
 
+
         UserDTO userDTO = dto.getUserDTO();
         BranchDTO branchDTO = userDTO.getBranchDTO();
         Branch branch = new Branch(branchDTO.getBranch_id(), branchDTO.getBranch_address(), branchDTO.getBranch_telephone(), null,null);
