@@ -30,7 +30,7 @@ public class TransactionBOImpl implements TransactionBO {
     }
 
     @Override
-    public boolean isBorrowBook(UsersBorrowingBooksDTO dto) {
+    public boolean isBorrowBook(UsersBorrowingBooksDTO dto) {   // Transaction 1 --> When borrow a book
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
@@ -72,7 +72,7 @@ public class TransactionBOImpl implements TransactionBO {
 
 
     @Override
-    public boolean updateIsReturn(UsersBorrowingBooksDTO dto) {
+    public boolean updateIsReturn(UsersBorrowingBooksDTO dto) {     // Transaction 2 --> When return a book
 
         Session session = FactoryConfiguration.getFactoryConfiguration().getSession();
         Transaction transaction = session.beginTransaction();
