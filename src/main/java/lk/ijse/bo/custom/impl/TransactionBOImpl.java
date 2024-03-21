@@ -106,7 +106,6 @@ public class TransactionBOImpl implements TransactionBO {
 
         session.update(book);   // Update book entity as availability status false
 
-
         transaction.commit();
         session.close();
 
